@@ -76,6 +76,7 @@ extern snapshot* snapshot_Tail;
 extern int FirstListProcess;
 extern int processNotExist;
 extern int userResponse;
+extern char str[100];
 
 
 extern snapshot* newSnapShot;

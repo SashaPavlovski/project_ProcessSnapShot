@@ -9,8 +9,8 @@
 
 void resetCollections(snapshot* headSanpSot)
 {
-	//firstTime = 0;
-	//dynamicHtml();
+	firstTime = 0;
+	saveInToFileHTML(readFromFile());
 	restet = 1;
 	snapshot* currentSnapShot = headSanpSot;
 	PROCESS* currentProcess;

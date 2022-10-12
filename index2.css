@@ -1,0 +1,27 @@
+header {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+table,
+th,
+td,
+tr {
+  border: solid black 3px;
+}
+td {
+  padding: 5px;
+}
+.toptitle {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}

@@ -7,20 +7,21 @@
 #include "oneSnapShot.h"
 #include "resetCollectionsFile.h"
 #include "structHeaderFunction.h"
+#include "homePageHTML.h"
 
 #pragma warning(disable:4996)
 
 
 int userResponse = 0;
-
-int main_1()
+char str[100] = "";
+int main()
 {
 	headerMalloc();
 	time_t t;
 	time(&t);
 	struct tm* timeinfo;
 	timeinfo = localtime(&t);
-	char str[100];
+
 	int qaa;
 	while (userResponse != 9)
 	{
@@ -33,7 +34,6 @@ int main_1()
 
 			sprintf(str, "%d.%d.%d/%d:%d:%d", timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 			addOneSnapShot(NULL);
-			strcpy(newSnapShot->timeOfSnapshot, str);
 			//Take One SnapShot
 			break;
 
@@ -41,18 +41,17 @@ int main_1()
 
 			sprintf(str, "%d.%d.%d/%d:%d:%d", timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 			addOneSnapShot(NULL);
-			strcpy(newSnapShot->timeOfSnapshot, str);
 			//Take 20 SnapShots
 			break;
 		case 3:
 
 			sprintf(str, "%d.%d.%d/%d:%d:%d", timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
 			addOneSnapShot(NULL);
-			strcpy(newSnapShot->timeOfSnapshot, str);
 			//Start Long SnapShot
 			break;
 
 		case 5:
+			dynamicHtml("index.html",NULL);
 			//Generate HTML Report
 			break;
 		case 6:
@@ -74,8 +73,8 @@ int main_1()
 
 		case 9:
 
-			//firstTime = 0;
-			//dynamicHtml();
+			firstTime = 0;
+			saveInToFileHTML(readFromFile());
 			break;
 		}
 

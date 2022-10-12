@@ -6,10 +6,14 @@
 
 
 int firstTime = 0;
+char seperator;
+char nameFile[] = " ";
 
-void dynamicHtml()
+char* dynamicHtml(char* nameOfFile,char* addString)
 {
-	char dynamicTable[] = "<tr>\n<td> 1 </td>\n<td> Samples1.html- </td>\n<td> 2 </td>\n<td> Samples2.html </td>\n<td> 2 </td>\n</tr>\n";
+
+	strcpy(nameFile,nameOfFile);
+	char* dynamicTable = addString;
 	char* htmlFileTemplate = readFromFile();
 	firstTime = 1;
 
@@ -17,44 +21,57 @@ void dynamicHtml()
 	char* found = strstr(htmlFileTemplate, SEPERATOR);
 
 	int len = found - htmlFileTemplate;
-	char* newFileSpace = (char*)malloc(strlen(htmlFileTemplate) + strlen(dynamicTable));
+	char* newFileSpace = (char*)malloc(strlen(htmlFileTemplate) + 1 + strlen(dynamicTable));
 
 	strncpy(newFileSpace, htmlFileTemplate, len);
-	newFileSpace[len] = NULL;
 
+	newFileSpace[len] = NULL;
 	strcat(newFileSpace, dynamicTable);
-	//newFileSpace[len + strlen(dynamicTable)] = NULL;
+
 
 	strcat(newFileSpace,found);
 
-
-	saveInToFileHTML(newFileSpace);
+	char* nameForFile = (char*)malloc(50);
+	nameForFile = saveInToFileHTML(newFileSpace);
 	
+	    free(newFileSpace);
+		free(htmlFileTemplate);
+	
+		return nameForFile;
+
+}
+
+
+
+char* dynamicTitleHtml(char* nameOfFile, char* addString,char* title) {
+
+	strcpy(nameFile, nameOfFile);
+	char* dynamicTitle = title;
+	char* htmlFileTemplate = readFromFile();
+	firstTime = 1;
+	
+	// find the token
+	char* found = strstr(htmlFileTemplate, SEPERATOR_TITLE);
+
+	int len = found - htmlFileTemplate;
+	char* newFileSpace = (char*)malloc(strlen(htmlFileTemplate) + 1 + strlen(dynamicTitle));
+
+	strncpy(newFileSpace, htmlFileTemplate, len);
+
+	newFileSpace[len] = NULL;
+	strcat(newFileSpace, dynamicTitle);
+
+	strcat(newFileSpace, found);
+
+	char* nameForFile = (char*)malloc(50);
+	nameForFile = saveInToFileHTML(newFileSpace);
 
 	free(newFileSpace);
 	free(htmlFileTemplate);
+	//free(dynamicTitle);
+	
+	dynamicHtml(nameOfFile, addString);
 
+	return nameForFile;
 
 }
-
-
-
-int main()
-{
-
-	dynamicHtml();
-
-	return;
-}
-
-
-
-
-
-
-
-
-
-
-
-
