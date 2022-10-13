@@ -8,10 +8,18 @@
 
 FILE* file;
 FILE* fileR;
+int countOfCreateFileIndex2 = 1;
+int countOfCreateFileIndex3 = 1;
+
+
+//know which file to open
+char* newNameOfFile = 0;
+
+
 char* readFromFile() {
 	
 
-	if (firstTime == 0)
+	if (firstTimeInFile == 0 && strcmp(nameFile, "index.html") != 0)
 	{
 		fileR = fopen(nameFile, "r");
 		if (!fileR)
@@ -19,6 +27,14 @@ char* readFromFile() {
 			return NULL;
 		}
 
+	}
+	else if (firstTimeHomePage == 0&& firstTimeInFile == 0)
+	{
+		fileR = fopen(nameFile, "r");
+		if (!fileR)
+		{
+			return NULL;
+		}
 	}
 	else if (strcmp(nameFile,"index.html")==0)
 	{
@@ -31,7 +47,7 @@ char* readFromFile() {
 	}
 	else if (strcmp(nameFile, "index2.html") == 0)
 	{
-		fileR = fopen("samplePage.html", "r");
+		fileR = fopen(newNameOfFile, "r");
 		if (!fileR)
 		{
 			//error
@@ -40,7 +56,7 @@ char* readFromFile() {
 	}
 	else if (strcmp(nameFile,"index3.html") == 0)
 	{
-		fileR = fopen("useDll.html", "r");
+		fileR = fopen(newNameOfFile, "r");
 		if (!fileR)
 		{
 			//error
@@ -51,25 +67,36 @@ char* readFromFile() {
 
 
     // Get the file size
-    char* buff = (char*)malloc(1000000);
+    char* buff = (char*)malloc(100000);
 	if (!buff)
 	{
 		return 1;
 	}
     char* read;
     int fileSize = 0;
-    while ((read = fgets(buff, 1000, fileR)))
+    while ((read = fgets(buff, 100000, fileR)))
     {
-	fileSize += strlen(buff);
+	    fileSize += strlen(buff);
     }
     
     free(buff);
     fclose(fileR);
-    fileSize++;
+    fileSize += 2;
+
+
+
+
     // alloc space as file size
     buff = (char*)malloc(fileSize);
-    
-	if (firstTime == 0)
+	if (!buff)
+	{
+		return 1;
+	}
+
+
+
+
+	if (firstTimeInFile == 0 && strcmp(nameFile, "index.html") != 0)
 	{
 		fileR = fopen(nameFile, "r");
 		if (!fileR)
@@ -77,6 +104,15 @@ char* readFromFile() {
 			return NULL;
 		}
 
+	}
+	else if (firstTimeHomePage == 0 && firstTimeInFile == 0)
+	{
+		firstTimeHomePage = 1;
+		fileR = fopen(nameFile, "r");
+		if (!fileR)
+		{
+			return NULL;
+		}
 	}
 	else if (strcmp(nameFile, "index.html") == 0)
 	{
@@ -89,7 +125,7 @@ char* readFromFile() {
 	}
 	else if (strcmp(nameFile, "index2.html") == 0)
 	{
-		fileR = fopen("samplePage.html", "r");
+		fileR = fopen(newNameOfFile, "r");
 		if (!fileR)
 		{
 			//error
@@ -98,7 +134,7 @@ char* readFromFile() {
 	}
 	else if (strcmp(nameFile, "index3.html") == 0)
 	{
-		fileR = fopen("useDll.html", "r");
+		fileR = fopen(newNameOfFile, "r");
 		if (!fileR)
 		{
 			//error
@@ -114,6 +150,7 @@ char* readFromFile() {
     	readPosition++;
     }
     buff[readPosition] = NULL;
+	int a = strlen(buff);
     
     fclose(fileR);
     
@@ -124,81 +161,10 @@ char* readFromFile() {
 
 
 
-
-
-
-/*
-
-char* readFromFile()
-{
-	FILE* f;
-	if (firstTime == 0)
-	{
-		f = fopen("index.html", "r");
-		if (!f)
-		{
-			//error
-			return 0;
-		}
-	}
-	else
-	{
-		f = fopen("updatedHtmlFile.html", "r");
-		if (!f)
-		{
-			//error
-			return 0;
-		}
-	}
-
-	char* temp = (char*)malloc(10000);
-	int originFileSize = 0;
-	while (fread(temp, sizeof(char), 1, f))
-	{
-		originFileSize++;
-	}
-
-	fclose(f);
-	free(temp);
-	originFileSize++;
-
-
-		if (firstTime == 0)
-		{
-			f = fopen("index.html", "r");
-			if (!f)
-			{
-				//error
-				return 0;
-			}
-		}
-		else
-		{
-			f = fopen("updatedHtmlFile.html", "r");
-			if (!f)
-			{
-				//error
-				return 0;
-			}
-		}
-
-	 char* originFile =(char*) malloc(sizeof(originFileSize));
-	 free(originFile);
-
-	 fread(originFile, sizeof(char), originFileSize, f);
-	 int a = strlen(originFile);
-	 originFile[originFileSize] = NULL;
-	 a = strlen(originFile);
-	 fclose(f);
-	 return originFile;
-	
-}
-*/
-
-
-
 char* saveInToFileHTML(char* newFile)
 {
+	
+
 	//enter the function PhotoCopying
 	if (strcmp(nameFile, "index.html") == 0)
 	{
@@ -206,36 +172,37 @@ char* saveInToFileHTML(char* newFile)
 	   if (!file)
 	   {
 	    	//error - The file (PhotoCopying.html) did not open
-	    	return "homePage.html";
+	    	return 1;
 	   }
+
 	   //The file (newName) was opened successfully
-	   
 	   fputs(newFile, file);
 	   fclose(file);
+	  
     }
     else if (strcmp(nameFile, "index2.html") == 0)
     {
-        file = fopen("samplePage.html", "w");
+        file = fopen(newNameOfFile, "w");
         if (!file)
         {
-        	 //error - The file (PhotoCopying.html) did not open
-        	 return "samplePage.html";
+        	//error - The file (PhotoCopying.html) did not open
+			return 1;
         }
+
         //The file (newName) was opened successfully
-    
         fputs(newFile, file);
         fclose(file);
     }
 	else if (strcmp(nameFile, "index3.html") == 0)
 	{
-		file = fopen("useDll.html", "w");
+		file = fopen(newNameOfFile, "w");
 		if (!file)
 		{
 			//error - The file (PhotoCopying.html) did not open
-			return "useDll.html";
+			return 1;
 		}
-		//The file (newName) was opened successfully
 
+		//The file (newName) was opened successfully
 		fputs(newFile, file);
 		fclose(file);
 	}
@@ -245,6 +212,8 @@ char* saveInToFileHTML(char* newFile)
 		printf("no exist file\n");
 		return 1;
 	}
+
+	return newNameOfFile;
 	//The file (PhotoCopying.html) is closed, the function PhotoCopying is finished
 }
 
@@ -254,3 +223,26 @@ char* saveInToFileHTML(char* newFile)
 
 
 
+char* createNewName(char* nameOfOriginFile) {
+
+	char* newNameFile = (char*)malloc(30);
+
+	if (strcmp(nameOfOriginFile, "index2.html") == 0)
+	{
+	    sprintf(newNameFile, "samplePage_%d.html", countOfCreateFileIndex2);
+	    countOfCreateFileIndex2++;
+
+	    return newNameFile;
+	}
+	else if (strcmp(nameOfOriginFile, "index3.html") == 0)
+	{
+		sprintf(newNameFile, "useDll_%d.html", countOfCreateFileIndex3);
+		countOfCreateFileIndex3++;
+
+		return newNameFile;
+	}
+	else
+	{
+		return "homePage.html";
+	}
+}

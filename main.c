@@ -16,6 +16,7 @@ int userResponse = 0;
 char str[100] = "";
 int main()
 {
+	firstTimeHomePage = 0;
 	headerMalloc();
 	time_t t;
 	time(&t);
@@ -51,7 +52,7 @@ int main()
 			break;
 
 		case 5:
-			dynamicHtml("index.html",NULL);
+			dynamicHtml("index.html",NULL,NULL);
 			//Generate HTML Report
 			break;
 		case 6:
@@ -73,7 +74,8 @@ int main()
 
 		case 9:
 
-			firstTime = 0;
+			firstTimeInFile = 0;
+			firstTimeHomePage = 0;
 			saveInToFileHTML(readFromFile());
 			break;
 		}

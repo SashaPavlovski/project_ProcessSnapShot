@@ -67,15 +67,20 @@ void addOneSnapShot(snapshot* newSnapShotFromFile)
 			//error
 			return 1;
 		}
-	 
+		firstTimeInFile = 0;
 		char* temporaryHTML = displayProcessesInTable(newSnapShot);
 		char* temporaryTitle = displayProcessesInTitle(newSnapShot);
 		linkToSample = dynamicTitleHtml("index2.html", temporaryHTML, temporaryTitle);
-		free(temporaryHTML);
-		firstTime = 0;
-		char* fileNameHtml = displaySnapShotInTable(newSnapShot, linkToSample, addingDll(newSnapShot->myprocess), memoryAverage(newSnapShot));
-		//free(temporaryTitle);
-		dynamicHtml("index.html",fileNameHtml);
+	/*	free(temporaryTitle);
+		free(temporaryHTML);*/
+
+	    
+		firstTimeInFile = 0;
+		
+		char* dynamicLineHtml = displaySnapShotInTable(newSnapShot, linkToSample, addingDll(newSnapShot->myprocess), memoryAverage(newSnapShot));
+
+		//free(linkToSample);
+		dynamicHtml("index.html", dynamicLineHtml,NULL);
 		
 }
 
@@ -93,15 +98,15 @@ void headerSnapShotDetails()
 
 
 
-char* displaySnapShotInTable(snapshot* snapShot_html,char* fileNameHtml,int countDLLInSnapHTML,SIZE_T sizeOfMemoryHTML) {
+char* displaySnapShotInTable(snapshot* snapShot_html,char* NameProcessHtml,int countDLLInSnapHTML,SIZE_T sizeOfMemoryHTML) {
 
-	char* lineInTable = (char*)malloc(sizeof(long));
+	char* lineInTable = (char*)malloc(sizeof(SIZE_T));
 	if (!lineInTable)
 	{
 		//error
 		return 1;
 	}
-	sprintf(lineInTable, "<tr>\n<td> %d </td>\n<td><a href =\"%s\" >Sample%d</a></td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n</tr>\n", snapShot_html->countSnapsNumber, fileNameHtml, snapShot_html->countSnapsNumber, snapShot_html->countOfProcess, countDLLInSnapHTML, sizeOfMemoryHTML);
+	sprintf(lineInTable, "<tr>\n<td> %d </td>\n<td><a href =\"%s\" >Sample%d</a></td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n</tr>\n", snapShot_html->countSnapsNumber, NameProcessHtml, snapShot_html->countSnapsNumber, snapShot_html->countOfProcess, countDLLInSnapHTML, sizeOfMemoryHTML);
 	return lineInTable;
 		
 
@@ -134,7 +139,7 @@ char* displayDLLSInProcess(PROCESS* htmlProcess) {
 	    
 	}
 
-	free(origin);
+	//free(origin);
 	return allTheOptions;
 
 }
@@ -160,7 +165,7 @@ char* displayProcessesInTable(snapshot* snapShot_html) {
 	char* optionOfDLL = displayDLLSInProcess(process);
 	lineInTable[0] = NULL;
 	sprintf(lineInTable, "<tr>\n<td> %s </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td><select>\n<option selected>dll's list</option>\n%s</select></td>\n</tr>", process->nameOfProcess, process->processId, process->PageFaultCount, process->WorkingSetSize, process->QuotaPagedPoolUsage, process->QuotaPeakPagedPoolUsage, process->PagefileUsage, process->numbersOfDLL, optionOfDLL);
-	free(optionOfDLL);
+	//free(optionOfDLL);
 	process = process->next;
 	strcat(allTheProcesses, lineInTable);
 	}
