@@ -3,7 +3,7 @@
 
 
 typedef struct _DLLName {
-	char nameOfDLL[MAX_PATH];
+	char nameOfDLL[300];
 	int countDLL;
 	struct _DLLName* next;
 	struct _DLLName* prev;
@@ -22,7 +22,7 @@ extern int countOfDll;
 
 
 typedef struct _PROCESS {
-	char nameOfProcess[MAX_PATH];
+	char nameOfProcess[300];
 	DWORD PageFaultCount;
 	SIZE_T WorkingSetSize;
 	SIZE_T QuotaPeakPagedPoolUsage;
@@ -87,4 +87,34 @@ extern processHeader* processHeaderFile;
 extern DLLNameHeaders* DLLHeaderFile;
 
 
-#pragma once
+
+typedef struct _dictionaryProcess {
+	char nameOfProcess[300];
+	int countDictionaryProcess;
+	struct _dictionaryProcess* next;
+	struct _dictionaryProcess* prev;
+}S_dictionaryProcess;
+
+
+extern S_dictionaryProcess* dictionaryProcess_Head;
+extern S_dictionaryProcess* dictionaryProcess_Tail;
+
+
+typedef struct _dictionaryDLL {
+	char nameOfDLL[300];
+	int countDictionaryDLL;
+	S_dictionaryProcess* dictionaryProcessUsed;
+	S_dictionaryProcess* dictionaryProcessTail;
+	struct _dictionaryDLL* next;
+	struct _dictionaryDLL* prev;
+}dictionaryDLL;
+
+
+extern dictionaryDLL* dictionaryDLL_Head;
+extern dictionaryDLL* dictionaryDLL_Tail;
+
+
+
+
+
+#pragma onces

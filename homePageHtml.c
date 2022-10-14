@@ -33,6 +33,7 @@ char* dynamicHtml(char* nameOfFile,char* addString,char* topHtml )
 	{
 		newFileSpace = (char*)malloc(strlen(found) +strlen(topHtml) + 1 + strlen(dynamicTable));
 		strcpy(newFileSpace, topHtml);
+		free(topHtml);
 	}
 	// find the token
 
@@ -44,11 +45,11 @@ char* dynamicHtml(char* nameOfFile,char* addString,char* topHtml )
 	
 	char* nameForFile = saveInToFileHTML(newFileSpace);
 	
-	    //free(newFileSpace);
-		//free(htmlFileTemplate);
-		//free(topHtml);
+	   
+		free(htmlFileTemplate);
+	
 		//free(dynamicTable);
-
+	
 		return nameForFile;
 
 }
@@ -56,13 +57,16 @@ char* dynamicHtml(char* nameOfFile,char* addString,char* topHtml )
 
 
 char* dynamicTitleHtml(char* nameOfFile, char* addString,char* title) {
+
 	newNameOfFile = createNewName(nameOfFile);
 	strcpy(nameFile, nameOfFile);
 	char* dynamicTitle = title;
 	char* htmlFileTemplate = readFromFile();
-
 	// find the token
+	//if()
 	char* found = strstr(htmlFileTemplate, SEPERATOR_TITLE);
+	//else
+	//char* found = strstr(htmlFileTemplate, SEPERATOR_TITLE);
 
 	int len = found - htmlFileTemplate;
 	char* newFileSpace = (char*)malloc(strlen(htmlFileTemplate) + 1 + strlen(dynamicTitle));
@@ -73,28 +77,17 @@ char* dynamicTitleHtml(char* nameOfFile, char* addString,char* title) {
 	}
 
 	strncpy(newFileSpace, htmlFileTemplate, len);
-
 	newFileSpace[len] = NULL;
 	strcat(newFileSpace, dynamicTitle);
 	char* found_2 = strstr(htmlFileTemplate, SEPERATOR);
 	int len_2 = found_2 - found;
-
 	strncat(newFileSpace, found, len_2);
-
-	
 	newFileSpace[len_2+len+strlen(dynamicTitle)] = NULL;
-
-	
 	char* linkName = dynamicHtml(nameOfFile, addString, newFileSpace);
 
 
-	//free(newFileSpace);
-	//free(htmlFileTemplate);
+	//free(dynamicTitle);
+	free(htmlFileTemplate);
 	
-	
-
-	
-
 	return linkName;
-
 }

@@ -8,10 +8,10 @@
 #include "resetCollectionsFile.h"
 #include "structHeaderFunction.h"
 #include "homePageHTML.h"
-
+#include "dictionaryFunctions.h"
 #pragma warning(disable:4996)
 
-
+extern PROCESS* sortListProcess = NULL;
 int userResponse = 0;
 char str[100] = "";
 int main()
@@ -23,7 +23,6 @@ int main()
 	struct tm* timeinfo;
 	timeinfo = localtime(&t);
 
-	int qaa;
 	while (userResponse != 9)
 	{
 
@@ -52,7 +51,12 @@ int main()
 			break;
 
 		case 5:
-			dynamicHtml("index.html",NULL,NULL);
+			addProcess(NULL);
+			addDictionaryDLL( NULL, NULL);
+			dictionaryProcess(snapshot_Head);
+			sortListProcess = PROCESS_Head;
+			dictionaryDLLFunction(sortListProcess);
+			//dynamicHtml("index.html", NULL, NULL);
 			//Generate HTML Report
 			break;
 		case 6:
@@ -76,6 +80,7 @@ int main()
 
 			firstTimeInFile = 0;
 			firstTimeHomePage = 0;
+			//free(newNameOfFile);
 			saveInToFileHTML(readFromFile());
 			break;
 		}

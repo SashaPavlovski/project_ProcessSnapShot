@@ -7,9 +7,9 @@
 #pragma warning(disable:4996)
 
 
-int addingDll(PROCESS* headProcess) {
+int addingDll(snapshot* snapShot) {
 
-	PROCESS* moveProcess = headProcess;
+	PROCESS* moveProcess = snapShot->myprocess;
 	long sumOfDll = 0;
 
 

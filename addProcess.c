@@ -6,6 +6,8 @@
 #include "typesFilesHeader.h"
 #include "resetCollectionsFile.h"
 #include "structHeaderFunction.h"
+#include "SnapShotList.h"
+#include "dictionaryFunctions.h"
 #pragma warning(disable:4996)
 
  PROCESS* PROCESS_Head = NULL;
@@ -30,12 +32,13 @@ void addProcess(PROCESS* processNew)
 		if (processNotExist == 1)
 		{
 			processNotExist = 0;
+			freeProcess = 1;
 			return;
 		}
 
 	}
 
-
+	freeProcess = 0;
 	++countP;
 
 	// The function has started

@@ -67,19 +67,19 @@ char* readFromFile() {
 
 
     // Get the file size
-    char* buff = (char*)malloc(100000);
-	if (!buff)
+    char* charCount = (char*)malloc(1000);
+	if (!charCount)
 	{
 		return 1;
 	}
     char* read;
     int fileSize = 0;
-    while ((read = fgets(buff, 100000, fileR)))
+    while ((read = fgets(charCount, 1000, fileR)))
     {
-	    fileSize += strlen(buff);
+	    fileSize += strlen(charCount);
     }
     
-    free(buff);
+    free(charCount);
     fclose(fileR);
     fileSize += 2;
 
@@ -87,8 +87,8 @@ char* readFromFile() {
 
 
     // alloc space as file size
-    buff = (char*)malloc(fileSize);
-	if (!buff)
+	char* inThefile = (char*)malloc(fileSize);
+	if (!inThefile)
 	{
 		return 1;
 	}
@@ -146,15 +146,14 @@ char* readFromFile() {
     char charToRead;
     while ((charToRead = fgetc(fileR)) != EOF)
     {
-    	buff[readPosition] = charToRead;
+		inThefile[readPosition] = charToRead;
     	readPosition++;
     }
-    buff[readPosition] = NULL;
-	int a = strlen(buff);
+	inThefile[readPosition] = NULL;
+	
     
     fclose(fileR);
-    
-    return buff;
+    return inThefile;
 
 }
 
@@ -163,8 +162,6 @@ char* readFromFile() {
 
 char* saveInToFileHTML(char* newFile)
 {
-	
-
 	//enter the function PhotoCopying
 	if (strcmp(nameFile, "index.html") == 0)
 	{
@@ -212,7 +209,7 @@ char* saveInToFileHTML(char* newFile)
 		printf("no exist file\n");
 		return 1;
 	}
-
+	free(newFile);
 	return newNameOfFile;
 	//The file (PhotoCopying.html) is closed, the function PhotoCopying is finished
 }
@@ -243,6 +240,6 @@ char* createNewName(char* nameOfOriginFile) {
 	}
 	else
 	{
-		return "homePage.html";
+		return NULL;
 	}
 }

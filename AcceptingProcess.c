@@ -14,14 +14,14 @@ int FirstListProcess = 0;
 void PrintMemoryInfo(DWORD processID)
 {
 
-	PROCESS ret; 
+	PROCESS* ret = (PROCESS*)malloc(sizeof(PROCESS));
 	HANDLE hProcess;
 	PROCESS_MEMORY_COUNTERS pmc;
 
 	
-	ret.prev = NULL;
-	ret.next = NULL;
-	ret.processId = processID;
+	ret->prev = NULL;
+	ret->next = NULL;
+	ret->processId = processID;
 	// Open process in order to receive information
 	hProcess = OpenProcess(PROCESS_QUERY_INFORMATION |
 		PROCESS_VM_READ,
@@ -43,8 +43,8 @@ void PrintMemoryInfo(DWORD processID)
 	{
 
 		size_t numConverted;
-		wcstombs_s(&numConverted, ret.nameOfProcess, MAX_PATH, FoundProcessName, MAX_PATH);
-		if (strlen(ret.nameOfProcess) < 1)
+		wcstombs_s(&numConverted, ret->nameOfProcess, MAX_PATH, FoundProcessName, MAX_PATH);
+		if (strlen(ret->nameOfProcess) < 1)
 		{
 			//not have name to the process
 			return 1;
@@ -62,11 +62,11 @@ void PrintMemoryInfo(DWORD processID)
 	if (GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc)))
 	{
 
-		ret.PageFaultCount = pmc.PageFaultCount;
-		ret.WorkingSetSize = pmc.WorkingSetSize;
-		ret.QuotaPeakPagedPoolUsage = pmc.QuotaPeakPagedPoolUsage;
-		ret.QuotaPagedPoolUsage = pmc.QuotaPagedPoolUsage;
-		ret.PagefileUsage = pmc.PagefileUsage;
+		ret->PageFaultCount = pmc.PageFaultCount;
+		ret->WorkingSetSize = pmc.WorkingSetSize;
+		ret->QuotaPeakPagedPoolUsage = pmc.QuotaPeakPagedPoolUsage;
+		ret->QuotaPagedPoolUsage = pmc.QuotaPagedPoolUsage;
+		ret->PagefileUsage = pmc.PagefileUsage;
 
 	}
 
@@ -91,9 +91,9 @@ void PrintMemoryInfo(DWORD processID)
 		}
 
 	}
-	ret.dllTail = DLLName_Tail;
-	ret.dll = DLLName_Head;
-	ret.numbersOfDLL = DLLName_Tail->countDLL;
+	ret->dllTail = DLLName_Tail;
+	ret->dll = DLLName_Head;
+	ret->numbersOfDLL = DLLName_Tail->countDLL;
 
 	CloseHandle(hProcess);
 

@@ -5,7 +5,6 @@
 #include "SnapShotList.h"
 #pragma warning(disable:4996)
 
-//PROCESS_Head = NULL;
 processNotExist = 0;
 
 void checkListProcess(PROCESS* CheckProcess)

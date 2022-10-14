@@ -5,11 +5,7 @@
 #include "SnapShotList.h"
 #pragma warning(disable:4996)
 
-//DLLName_Head = NULL;
-//DLLName_Tail = NULL;
-int ExistsDLL = 0;
-
-
+extern int ExistsDLL = 0;
 void checkListDLL(PROCESS* currentProcess, DLLName * CheckDLL)
 {
 	DLLName* currentDLL = currentProcess->dll;

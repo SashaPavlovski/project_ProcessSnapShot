@@ -1,3 +1,8 @@
 #pragma once
-int addingDll(PROCESS* headProcess);
+int addingDll(snapshot* snapShot);
 SIZE_T memoryAverage(snapshot* snapShot);
+
+
+
+
+

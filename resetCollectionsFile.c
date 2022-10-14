@@ -11,6 +11,7 @@ void resetCollections(snapshot* headSanpSot)
 {
 	firstTimeInFile = 0;
 	firstTimeHomePage = 0;
+	//free(newNameOfFile);
 	saveInToFileHTML(readFromFile());
 	restet = 1;
 	snapshot* currentSnapShot = headSanpSot;
