@@ -6,8 +6,14 @@ char* dynamicHtml(char* nameOfFile, char* addString, char* topHtml);
 char* dynamicTitleHtml(char* nameOfFile, char* addString, char* title);
 char* createNewName(char* nameOfOriginFile);
 
+
+
 #define SEPERATOR "</tbody>"
 #define SEPERATOR_TITLE "</p>"
+#define SEPERATOR_NAV "</span>"
+#define SEPERATOR_TEMP "</tfoot>"
+
+
 
 //if this is the first time that file opened.
 extern int firstTimeInFile;
@@ -25,4 +31,7 @@ extern int countOfCreateFileIndex2;
 extern int countOfCreateFileIndex3;
 
 extern char* newNameOfFile;
+
+//know if is for table processes
+extern int titleProcesses;
 

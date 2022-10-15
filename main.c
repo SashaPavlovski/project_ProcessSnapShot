@@ -9,9 +9,10 @@
 #include "structHeaderFunction.h"
 #include "homePageHTML.h"
 #include "dictionaryFunctions.h"
+#include "homePageDLL.h"
 #pragma warning(disable:4996)
 
-extern PROCESS* sortListProcess = NULL;
+
 int userResponse = 0;
 char str[100] = "";
 int main()
@@ -51,12 +52,9 @@ int main()
 			break;
 
 		case 5:
-			addProcess(NULL);
-			addDictionaryDLL( NULL, NULL);
-			dictionaryProcess(snapshot_Head);
-			sortListProcess = PROCESS_Head;
-			dictionaryDLLFunction(sortListProcess);
-			//dynamicHtml("index.html", NULL, NULL);
+
+			HtmlPage();
+			countOfCreateFileIndex3 = 0;
 			//Generate HTML Report
 			break;
 		case 6:
@@ -77,7 +75,8 @@ int main()
 			break;
 
 		case 9:
-
+			countOfCreateFileIndex2 = 0;
+			countOfCreateFileIndex3 = 0;
 			firstTimeInFile = 0;
 			firstTimeHomePage = 0;
 			//free(newNameOfFile);
@@ -89,3 +88,10 @@ int main()
 	}
 	return 0;
 }
+
+
+
+
+
+
+

@@ -47,7 +47,7 @@ void PrintMemoryInfo(DWORD processID)
 		if (strlen(ret->nameOfProcess) < 1)
 		{
 			//not have name to the process
-			return 1;
+			return ;
 		}
 
 

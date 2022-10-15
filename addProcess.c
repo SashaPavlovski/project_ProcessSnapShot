@@ -32,13 +32,13 @@ void addProcess(PROCESS* processNew)
 		if (processNotExist == 1)
 		{
 			processNotExist = 0;
-			freeProcess = 1;
+			//freeProcess = 1;
 			return;
 		}
 
 	}
 
-	freeProcess = 0;
+	//freeProcess = 0;
 	++countP;
 
 	// The function has started

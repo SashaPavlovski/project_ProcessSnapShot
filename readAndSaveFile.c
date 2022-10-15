@@ -67,7 +67,7 @@ char* readFromFile() {
 
 
     // Get the file size
-    char* charCount = (char*)malloc(1000);
+    char* charCount = (char*)malloc(10000);
 	if (!charCount)
 	{
 		return 1;

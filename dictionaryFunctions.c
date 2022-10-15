@@ -10,12 +10,12 @@ dictionaryDLL* dictionaryDLL_Head = NULL;
 dictionaryDLL* dictionaryDLL_Tail = NULL;
 
 S_dictionaryProcess* usedDictionaryProcess = NULL;
-
+//void check();
 
 int countnewDictionaryDLL = 0;
- int existsDLLInList = 0;
+ int notExistsDLLInList = 0;
  char* nameDH = "";
- int freeProcess = 0;
+ //int freeProcess = 0;
 
 void dictionaryProcess(snapshot* snapShotList){
 	FirstListProcess = 1;
@@ -42,8 +42,7 @@ void dictionaryProcess(snapshot* snapShotList){
 }
 
 
-
-void dictionaryDLLFunction(PROCESS* sortProcessList){
+ void dictionaryDLLFunction(PROCESS* sortProcessList){
 
 		PROCESS* currentPro = sortProcessList;
 		PROCESS* OldcurrentPro;
@@ -66,7 +65,7 @@ void dictionaryDLLFunction(PROCESS* sortProcessList){
 		    
 		    		if (currentDictionaryDLL1->nameOfDLL != NULL && strcmp( currentCheckDLL->nameOfDLL, currentDictionaryDLL1->nameOfDLL) == 0)//checking if the dlls are equal
 		    		{
-		    			existsDLLInList = 1;
+						notExistsDLLInList = 1;
 						checkDictionaryDLL(currentCheckDLL, currentPro);
 						//free(currentCheckDLL);
 
@@ -74,14 +73,14 @@ void dictionaryDLLFunction(PROCESS* sortProcessList){
 		    		}
 					currentDictionaryDLL1 = currentDictionaryDLL1->next;// if the dlls are  
 		    	}
-		    	if (existsDLLInList != 1)
+		    	if (notExistsDLLInList != 1)
 		    	{
 		    		addDictionaryDLL(currentCheckDLL, currentPro);
 		    
 		    	}
 				
 		    	currentCheckDLL = currentCheckDLL->next;
-		    	existsDLLInList = 0;
+				notExistsDLLInList = 0;
 		    }
 
 			OldcurrentPro = currentPro;
@@ -89,8 +88,8 @@ void dictionaryDLLFunction(PROCESS* sortProcessList){
 		free(OldcurrentPro);
 		}
 
-		int a = 1;
-
+		//return dictionaryDLL_Tail->countDictionaryDLL;
+		//check();
 }
 
 
@@ -141,22 +140,43 @@ void addDictionaryDLL(DLLName* nameSortDLL, PROCESS* processSortDLL) {
 
 
 
-void checkDictionaryDLL(DLLName* dDLL, PROCESS* ppp)
+void checkDictionaryDLL(DLLName* dDLL, PROCESS* newProDictionary)
 {
-	dictionaryDLL* move = dictionaryDLL_Head;
+	dictionaryDLL* moveDictionaryDLL = dictionaryDLL_Head;
 
-	while (move != NULL)
+	while (moveDictionaryDLL != NULL)
 	{
-		if (strcmp(move->nameOfDLL, dDLL->nameOfDLL) == 0)
+		if (strcmp(moveDictionaryDLL->nameOfDLL, dDLL->nameOfDLL) == 0)
 		{
-			 addDictionaryProcess(move, ppp);
-			 move = dictionaryDLL_Tail;
+			 addDictionaryProcess(moveDictionaryDLL, newProDictionary);
+			 moveDictionaryDLL = dictionaryDLL_Tail;
 		}
 
-		move = move->next;
+		moveDictionaryDLL = moveDictionaryDLL->next;
 	}
 
 
 
 }
 
+
+////void check()
+////{
+////	dictionaryDLL* move = dictionaryDLL_Head;
+////	//dictionaryDLL* move_2 = dictionaryDLL_Head;
+////	printf("********************************************************\n");
+////	// (move_2 != NULL)
+////	
+////		
+////	//	move = dictionaryDLL_Head;
+////		while(move != NULL)
+////		{
+////			printf("%s\n", move->nameOfDLL);
+////		
+////				///*addDictionaryProcess(move, ppp);
+////				//move = dictionaryDLL_Tail;*/
+////			
+////			move = move->next;
+////		}
+////
+////}

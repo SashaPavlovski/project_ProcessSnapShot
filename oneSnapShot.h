@@ -5,7 +5,7 @@ void addOneSnapShot(snapshot* newSnapShotFromFile);
 void SortingBetweenTwoProcessCountDLL();
 
 void PrintCount();
-
+void PrintListDictionary();
 #pragma once
 
 

@@ -10,11 +10,11 @@ extern S_dictionaryProcess* usedDictionaryProcess;
 void MakeProcessDictionary(PROCESS* useProcess);
 
 
-//NESAYON
-void addDictionaryProcess(dictionaryDLL* proTail1, PROCESS* toList);
-void checkDictionaryDLL(DLLName* dDLL, PROCESS* ppp);
 
-extern int freeProcess;
+void addDictionaryProcess(dictionaryDLL* locationDLL, PROCESS* namePro);
+void checkDictionaryDLL(DLLName* dDLL, PROCESS* newProDictionary);
+
+//extern int freeProcess;
 
 
 

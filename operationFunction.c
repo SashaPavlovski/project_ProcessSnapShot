@@ -25,19 +25,42 @@ int addingDll(snapshot* snapShot) {
 SIZE_T memoryAverage (snapshot* snapShot) {
 
 	PROCESS* moveProcess = snapShot->myprocess;
-	SIZE_T averageOfMemoty = 0;
+	SIZE_T averageOfMemory = 0;
 
 
 	while (moveProcess != NULL) {
-		averageOfMemoty += moveProcess->WorkingSetSize;
+		averageOfMemory += moveProcess->WorkingSetSize;
 		moveProcess = moveProcess->next;
 	}
 
-	averageOfMemoty = averageOfMemoty / snapShot->countOfProcess;
-	return averageOfMemoty;
+	averageOfMemory = averageOfMemory / snapShot->countOfProcess;
+	return averageOfMemory;
 }
 
 
 
+SIZE_T memoryAvgForALLSnapshot() {
+
+	snapshot* moveSnapshot = snapshot_Head;
+	PROCESS* moveProcess = moveSnapshot->myprocess;
+	SIZE_T averageOfMemory = 0;
+	int sumOfProcess = 0;
 
 
+	while (moveSnapshot != NULL) {
+
+		moveProcess = moveSnapshot->myprocess;
+
+		while (moveProcess != NULL) {
+			sumOfProcess++;
+			averageOfMemory += moveProcess->WorkingSetSize;
+
+			moveProcess = moveProcess->next;
+		}
+
+		moveSnapshot = moveSnapshot->next;
+	}
+	averageOfMemory = averageOfMemory / sumOfProcess;
+	return averageOfMemory;
+
+}

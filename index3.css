@@ -1,0 +1,24 @@
+header {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+}
+
+table,
+th,
+td,
+tr {
+  border: solid black 3px;
+}
+td {
+  padding: 5px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  align-items: center;
+}

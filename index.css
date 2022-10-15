@@ -1,3 +1,14 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Poppins";
+  height: 100%;
+}
+
 header {
   display: flex;
   flex-direction: row;
@@ -33,19 +44,28 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  background-color: blanchedalmond;
 }
 
 .leftTables {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   justify-items: center;
+  width: 50%;
 }
-
+.lefttableLink {
+  margin: 100px;
+  width: 50%;
+  height: 100px;
+  background-color: blueviolet;
+}
 .rightTable {
   display: flex;
   flex-direction: column;
+  width: 50%;
+  background-color: aqua;
 }
 table,
 th,
@@ -53,4 +73,20 @@ td,
 tr {
   border: solid black 3px;
   border-collapse: collapse;
+}
+table {
+  width: 100%;
+}
+/* td {
+  width: 60%;
+  height: 50px;
+  overflow: auto;
+  border: 70%;
+} */
+
+.table_2 {
+  margin: 100px;
+  width: 400px;
+  height: 100px;
+  background-color: blueviolet;
 }

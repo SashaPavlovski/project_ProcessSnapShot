@@ -40,6 +40,25 @@ void PrintCount()
 	//LogEvent("The printing process is finished and the program PrintList is closed\n\n");
 }
 
+
+void PrintListDictionary()
+{
+	//LogEvent("Print program started\n");
+	dictionaryDLL* move = dictionaryDLL_Head;
+	dictionaryDLL* print = dictionaryDLL_Head;
+
+	while (move != NULL)
+	{
+		print = move;
+		move = move->next;
+		printf("the number is %s\n", print->nameOfDLL);
+		//LogEvent("A document has been printed\n");
+
+	}
+	//LogEvent("The printing process is finished and the program PrintList is closed\n\n");
+	printf("\n\n\n");
+}
+
 void replaceBetweenTwoProcess(PROCESS* processToChange)
 {
 	//LogEvent("enters the Replace function\n");

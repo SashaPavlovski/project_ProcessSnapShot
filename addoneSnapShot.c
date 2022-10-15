@@ -11,6 +11,7 @@
 #include "displayFunction.h"
 
 
+
 #pragma warning(disable:4996)
 
 snapshot* snapshot_Head = NULL;
@@ -18,6 +19,7 @@ snapshot* snapshot_Tail = NULL;
 
 int countOfSnapsNumber = 0;
 int loadFormFile = 0;
+int titleProcesses = 0;
 
 void addOneSnapShot(snapshot* newSnapShotFromFile)
 {
@@ -104,7 +106,7 @@ char* displaySnapShotInTable(snapshot* snapShot_html,char* NameProcessHtml,int c
 	if (!lineInTable)
 	{
 		//errors
-		return 1;
+		return ;
 	}
 	sprintf(lineInTable, "<tr>\n<td> %d </td>\n<td><a href =\"%s\" >Sample%d</a></td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n</tr>\n", snapShot_html->countSnapsNumber, NameProcessHtml, snapShot_html->countSnapsNumber, snapShot_html->countOfProcess, countDLLInSnapHTML, sizeOfMemoryHTML);
 	return lineInTable;
@@ -119,13 +121,13 @@ char* displayDLLSInProcess(PROCESS* htmlProcess) {
 	if (!lineInTable)
 	{
 		//error
-		return 1;
+		return ;
 	}
 	char* allTheOptions = (char*)malloc(sizeof(DLLName)* htmlProcess->numbersOfDLL+10000);
 	if (!allTheOptions)
 	{
 		//error
-		return 1;
+		return ;
 	}
 	allTheOptions[0] = NULL;
 	while (DLLOption != NULL)
@@ -176,34 +178,22 @@ char* displayProcessesInTable(snapshot* snapShot_html) {
 
 }
 char* displayProcessesInTitle(snapshot* snapShot_html) {
-
+	titleProcesses = 1;
 	char* lineInTable = (char*)malloc(100);
 	lineInTable[0] = NULL;
 	if (!lineInTable)
 	{
 		//error
-		return 1;
+		return ;
 	}
 	sprintf(lineInTable, "<h1> Samples List Number : %d At %s </h1>", snapShot_html->countSnapsNumber, snapShot_html->timeOfSnapshot);
 	return lineInTable;
 
 
 }
-//
-//
-//char* dynamicNav()
-//{
-//	char* dataNav = (char*)malloc(100);
-//	dataNav[0] = NULL;
-//	if (!dataNav)
-//	{
-//		//error
-//		return 1;
-//	}
-//	sprintf(dataNav, "\n<div> Dll's cnt: %d </div>\n<div> Processes cnt: %d </div>\n<div> Memory avg: %d </div>\n");
-//		
-//	return dataNav;
-//}
+
+
+
 
 
 
