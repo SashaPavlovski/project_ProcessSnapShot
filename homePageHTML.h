@@ -6,6 +6,8 @@ char* dynamicHtml(char* nameOfFile, char* addString, char* topHtml);
 char* dynamicTitleHtml(char* nameOfFile, char* addString, char* title);
 char* createNewName(char* nameOfOriginFile);
 
+void creatingHtml();
+
 
 
 #define SEPERATOR "</tbody>"

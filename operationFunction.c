@@ -6,7 +6,8 @@
 
 #pragma warning(disable:4996)
 
-
+//Summarize all count dlls in each process
+//add a new snapshot
 int addingDll(snapshot* snapShot) {
 
 	PROCESS* moveProcess = snapShot->myprocess;
@@ -18,10 +19,12 @@ int addingDll(snapshot* snapShot) {
 			moveProcess = moveProcess->next;
 		}
 
+		//returns the count dlls amount
 		return sumOfDll;
 }
 
-
+//calculate average of all memory of processes
+//add a new snapshot
 SIZE_T memoryAverage (snapshot* snapShot) {
 
 	PROCESS* moveProcess = snapShot->myprocess;
@@ -34,11 +37,13 @@ SIZE_T memoryAverage (snapshot* snapShot) {
 	}
 
 	averageOfMemory = averageOfMemory / snapShot->countOfProcess;
+
+	//returns the memory average
 	return averageOfMemory;
 }
 
 
-
+//calculate average of all memory of processes that in all the snapshotns
 SIZE_T memoryAvgForALLSnapshot() {
 
 	snapshot* moveSnapshot = snapshot_Head;
@@ -61,6 +66,35 @@ SIZE_T memoryAvgForALLSnapshot() {
 		moveSnapshot = moveSnapshot->next;
 	}
 	averageOfMemory = averageOfMemory / sumOfProcess;
+
+	//returns the memory average
 	return averageOfMemory;
 
+}
+
+
+//checks which process in the snapshot takes up the most memory
+//add a new snapshot
+PROCESS* theBiggestMemory(snapshot* snapShot_html)
+{
+	PROCESS* theProcess = snapShot_html->myprocess;
+	PROCESS* retProcess = "";
+	SIZE_T theBiggesMemory = snapShot_html->myprocess->WorkingSetSize;
+
+
+	while (theProcess != NULL)
+	{
+		//Whenever the memory of process is bigger than theBiggesMemory 
+		//the memory of process becomes theBiggesMemory
+		if (theProcess->WorkingSetSize > theBiggesMemory)
+		{
+			theBiggesMemory = theProcess->WorkingSetSize;
+			retProcess = theProcess;
+		}
+		theProcess = theProcess->next;
+
+	}
+
+	//returns the process that takes up the most memory
+	return retProcess;
 }

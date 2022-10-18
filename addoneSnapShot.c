@@ -10,8 +10,6 @@
 #include "homePageHTML.h"
 #include "displayFunction.h"
 
-
-
 #pragma warning(disable:4996)
 
 snapshot* snapshot_Head = NULL;
@@ -21,8 +19,11 @@ int countOfSnapsNumber = 0;
 int loadFormFile = 0;
 int titleProcesses = 0;
 
+//get new SnapShot and links it to a snapsot linked list if we download from a file
+//or create a new Snapchat
 void addOneSnapShot(snapshot* newSnapShotFromFile)
 {
+	//creates a new place in memory
 	newSnapShot = (snapshot*)malloc(sizeof(snapshot));
 	if (!newSnapShot)
 	{
@@ -30,26 +31,41 @@ void addOneSnapShot(snapshot* newSnapShotFromFile)
 		exit(1);
 	}
 
-	
+	//each snapshot has a new list
+    //reset the PROCESS_Head 
 	addProcess(NULL);
 
+	//Enter only if it does not download from a file
 	if (loadFormFile == 0)
 	{
-		GetProcessesInfo();
+		//creates a linked list of processors
+		getProcessesInfo();
+
+		//sorts by the amount of dlls in each processor
 		SortingBetweenTwoProcessCountDLL();
-		PrintCount();
+
+		//Saves the process linked list and its quantity
 		newSnapShot->myprocess = PROCESS_Head;
 		newSnapShot->countOfProcess = PROCESS_Tail->countProcess;
 	}
 	else
 	{
+		//add the all information from new snapshot into the new space
 		newSnapShot = newSnapShotFromFile;
 	}
 
+	//count the snapshots, every time a new snapsot enter to function it is increases by one
 	++countOfSnapsNumber;
+
+	//add the snapshot number into the new space
 	newSnapShot->countSnapsNumber = countOfSnapsNumber;
+
+	//caves the time the user press to create a new snapshot
 	strcpy(newSnapShot->timeOfSnapshot, str);
+
 	newSnapShot->next = NULL;
+
+	//links the new snapshot to the linked list
 	if (snapshot_Head == NULL)
 	{
 
@@ -64,139 +80,62 @@ void addOneSnapShot(snapshot* newSnapShotFromFile)
 		snapshot_Tail = newSnapShot;
 	}
 
-
+	    //creates a header struct for snapshots
 		headerSnapShotDetails();
 
-		firstTimeInFile = 0;
-		char* temporaryHTML = displayProcessesInTable(newSnapShot);
-		char* temporaryTitle = displayProcessesInTitle(newSnapShot);
-		char* linkToSample = dynamicTitleHtml("index2.html", temporaryHTML, temporaryTitle);
-		//free(temporaryTitle);
-		free(temporaryHTML);
-
-		firstTimeInFile = 0;
-
-
-		char* dynamicLineHtml = displaySnapShotInTable(newSnapShot, linkToSample, addingDll(newSnapShot), memoryAverage(newSnapShot));
-        free(linkToSample);
-		char* nameF = dynamicHtml("index.html", dynamicLineHtml,NULL);
-		//free(nameF);
-		//free(dynamicLineHtml);
-		
+		//Enter only if it does not download from a file
+		//creates an html page for processes and the home page
+		if (loadFormFile == 0) creatingHtml();
 }
 
 
 
-
+// creates a header struct
 void headerSnapShotDetails()
 {
+	//Updates the version of the snapshot struct 
 	snapShotHeaderFile->versionSnapShot = versionOfSnapShot;
+
+	//saves the amount of the snapshots
 	snapShotHeaderFile->countSnapshot = snapshot_Tail->countSnapsNumber;
-	snapShotHeaderFile->reserve[0];
+
+	//Saves space for changes in snapshot struct
+	snapShotHeaderFile->reserve[20] = NULL;
 }
 
 
 
+//creates an html page for processes and the home page
+void creatingHtml() {
+	
+	//Resets the sing that means read the file from the beginning
+	firstTimeInFile = 0;
 
+	//creating a dynamic process table
+	//add a new snapshot
+	char* temporaryHTML = displayProcessesInTable(newSnapShot);
 
-char* displaySnapShotInTable(snapshot* snapShot_html,char* NameProcessHtml,int countDLLInSnapHTML,SIZE_T sizeOfMemoryHTML) {
+	//creating a dynamic process title
+	//add a new snapshot
+	char* temporaryTitle = displayProcessesInTitle(newSnapShot);
 
-	char* lineInTable = (char*)malloc(sizeof(int)*100);
-	//lineInTable[0] = NULL;
-	if (!lineInTable)
-	{
-		//errors
-		return ;
-	}
-	sprintf(lineInTable, "<tr>\n<td> %d </td>\n<td><a href =\"%s\" >Sample%d</a></td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n</tr>\n", snapShot_html->countSnapsNumber, NameProcessHtml, snapShot_html->countSnapsNumber, snapShot_html->countOfProcess, countDLLInSnapHTML, sizeOfMemoryHTML);
-	return lineInTable;
-		
+	//creates an html page for all the processes in snapshot
+	char* linkToSample = dynamicTitleHtml("index2.html", temporaryHTML, temporaryTitle);
+	//free(temporaryTitle);
+	free(temporaryHTML);
 
-}
+	firstTimeInFile = 0;
 
-char* displayDLLSInProcess(PROCESS* htmlProcess) {
-	DLLName* DLLOption = htmlProcess->dll;
-	char* lineInTable = (char*)malloc(sizeof(DLLName) +200);
-	char* origin = lineInTable;
-	if (!lineInTable)
-	{
-		//error
-		return ;
-	}
-	char* allTheOptions = (char*)malloc(sizeof(DLLName)* htmlProcess->numbersOfDLL+10000);
-	if (!allTheOptions)
-	{
-		//error
-		return ;
-	}
-	allTheOptions[0] = NULL;
-	while (DLLOption != NULL)
-	{
+	//creating a dynamic sample table
+    //add a new snapshot, file name of tne HTML processes page, amount of dll in Snapshot, amount of memory of all processes.
+	char* dynamicLineHtml = displaySnapShotInTable(newSnapShot, linkToSample, addingDll(newSnapShot), memoryAverage(newSnapShot));
+	free(linkToSample);
 
-		sprintf(lineInTable, "<option> %s </option>\n", DLLOption->nameOfDLL);
-		DLLOption = DLLOption->next;
-		strcat(allTheOptions, lineInTable);
-	   
-	    
-	}
-
-	free(origin);
-	return allTheOptions;
+	//creates the first part of a home page
+	//the table of samples
+	//add file name of page we want to open and the dinamic sample table.
+	char* nameF = dynamicHtml("index.html", dynamicLineHtml, NULL);
+	//free(nameF);
+	//free(dynamicLineHtml);
 
 }
-
-char* displayProcessesInTable(snapshot* snapShot_html) {
-
-	PROCESS* process = snapShot_html->myprocess;
-	char* lineInTable = (char*)malloc(sizeof(PROCESS)*100000);
-	if (!lineInTable)
-	{
-		//error
-		return 1;
-	}
-	char* allTheProcesses = (char*)malloc(sizeof(PROCESS) * snapShot_html->countOfProcess + 10000000);
-	if (!allTheProcesses)
-	{
-		//error
-		return 1;
-	}
-	allTheProcesses[0] = NULL;
-	char* optionOfDLL = NULL;
-	while (process != NULL)
-	{
-		optionOfDLL = displayDLLSInProcess(process);
-        lineInTable[0] = "";
-	    sprintf(lineInTable, "<tr>\n<td> %s </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td><select>\n<option selected>dll's list</option>\n%s</select></td>\n</tr>", process->nameOfProcess, process->processId, process->PageFaultCount, process->WorkingSetSize, process->QuotaPagedPoolUsage, process->QuotaPeakPagedPoolUsage, process->PagefileUsage, process->numbersOfDLL, optionOfDLL);
-	    process = process->next;
-	    strcat(allTheProcesses, lineInTable);
-	    
-	}
-	free(lineInTable);
-	free(optionOfDLL);
-	return allTheProcesses;
-
-
-}
-char* displayProcessesInTitle(snapshot* snapShot_html) {
-	titleProcesses = 1;
-	char* lineInTable = (char*)malloc(100);
-	lineInTable[0] = NULL;
-	if (!lineInTable)
-	{
-		//error
-		return ;
-	}
-	sprintf(lineInTable, "<h1> Samples List Number : %d At %s </h1>", snapShot_html->countSnapsNumber, snapShot_html->timeOfSnapshot);
-	return lineInTable;
-
-
-}
-
-
-
-
-
-
-
-
-

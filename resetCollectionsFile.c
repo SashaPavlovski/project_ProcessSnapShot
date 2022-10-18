@@ -3,6 +3,7 @@
 #include <time.h>
 #include "typesStructs.h"
 #include "resetCollectionsFile.h"
+#include "structHeaderFunction.h"
 #include "homePageHTML.h"
 #pragma warning(disable:4996)
 
@@ -14,6 +15,7 @@ void resetCollections(snapshot* headSanpSot)
 	//free(newNameOfFile);
 	saveInToFileHTML(readFromFile());
 	restet = 1;
+	headerMalloc();
 	snapshot* currentSnapShot = headSanpSot;
 	PROCESS* currentProcess;
 	DLLName* currentDLL;

@@ -75,7 +75,10 @@ extern snapshot* snapshot_Tail;
 
 
 extern int FirstListProcess;
+
+//sign that the process entered the function checkListProcess
 extern int processNotExist;
+
 extern int userResponse;
 extern char str[100];
 

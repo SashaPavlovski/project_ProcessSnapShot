@@ -7,8 +7,20 @@
 
 
 int restet = 0;
+//Creates space to header structs
 void headerMalloc()
 {
+	//sign that resets the space to header structss
+	if (restet == 1)
+	{
+		restet = 0;
+		free(snapShotHeaderFile);
+		free(processHeaderFile);
+		free(DLLHeaderFile);
+		return;
+	}
+
+
 	snapShotHeaderFile = (snapShotHeader*)malloc(sizeof(snapShotHeader));
 	if (!snapShotHeaderFile)
 	{
@@ -31,12 +43,5 @@ void headerMalloc()
 		return;
 	}
 
-	if (restet == 1)
-	{
-		restet = 0;
-		free(snapShotHeaderFile);
-		free(processHeaderFile);
-		free(DLLHeaderFile);
-	}
 
 }

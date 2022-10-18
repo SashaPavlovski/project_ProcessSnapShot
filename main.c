@@ -10,6 +10,7 @@
 #include "homePageHTML.h"
 #include "dictionaryFunctions.h"
 #include "homePageDLL.h"
+#include "resetCollectionsFile.h"
 #pragma warning(disable:4996)
 
 
@@ -17,12 +18,14 @@ int userResponse = 0;
 char str[100] = "";
 int main()
 {
+	int HTMLUsed = 0;
 	firstTimeHomePage = 0;
 	headerMalloc();
 	time_t t;
 	time(&t);
 	struct tm* timeinfo;
 	timeinfo = localtime(&t);
+	int a = 1;
 
 	while (userResponse != 9)
 	{
@@ -52,13 +55,22 @@ int main()
 			break;
 
 		case 5:
-
 			HtmlPage();
-			countOfCreateFileIndex3 = 0;
+			HTMLUsed = 1;
 			//Generate HTML Report
 			break;
 		case 6:
-			resetCollections(snapshot_Head);
+			
+			a = 1;
+			if (HTMLUsed == 0) {
+				resetCollections(snapshot_Head);
+
+			}
+			else {
+				deleteDictionaryDLLAndPro();
+				resetCollections(snapshot_Head);
+				HTMLUsed = 0;
+			}
 			//Reset Collections
 			break;
 

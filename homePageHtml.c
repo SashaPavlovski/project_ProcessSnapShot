@@ -39,9 +39,12 @@ char* dynamicHtml(char* nameOfFile, char* addString, char* topHtml)
 	}
 	else
 	{
-		newFileSpace = (char*)malloc(strlen(found) + strlen(topHtml) + 1 + strlen(dynamicTable));
+
+		found = strstr(htmlFileTemplate, SEPERATOR);
+		newFileSpace = (char*)malloc(strlen(found) + strlen(topHtml) + 2 + strlen(dynamicTable));
+		//newFileSpace = "";
 		strcpy(newFileSpace, topHtml);
-		free(topHtml);
+		//free(topHtml);
 	}
 	// find the token
 	strcat(newFileSpace, dynamicTable);

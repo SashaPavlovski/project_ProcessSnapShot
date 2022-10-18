@@ -1,4 +1,4 @@
-void PrintMemoryInfo(DWORD processID);
-void GetProcessesInfo();
+void getMemoryInfo(DWORD processID);
+void getProcessesInfo();
 
 #pragma once

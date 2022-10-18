@@ -5,6 +5,8 @@
 #include "fileFunction.h"
 #include "oneSnapShot.h"
 #include "resetCollectionsFile.h"
+#include "homePageHTML.h"
+
 #pragma warning(disable:4996)
 
 snapshot* newSnapShot = NULL;
@@ -134,6 +136,7 @@ void loadSnapFromFile()
 		Sleep(1000);
 		newSnapShot->myprocess = PROCESS_Head;
 		newSnapShot->countOfProcess = PROCESS_Tail->countProcess;
+		creatingHtml();
 	}
 
 	loadFormFile = 0;

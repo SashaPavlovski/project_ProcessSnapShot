@@ -8,8 +8,9 @@
 S_dictionaryProcess* dictionaryProcess_Head = NULL;
 S_dictionaryProcess* dictionaryProcess_Tail = NULL;
 
+S_dictionaryProcess* usedDictionaryProcess = NULL;
 
-
+//get the first process and links his name to a dictinary process linked list
 void MakeProcessDictionary(PROCESS* useProcessInDLL)
 {
 	if (useProcessInDLL == NULL)
@@ -30,6 +31,7 @@ void MakeProcessDictionary(PROCESS* useProcessInDLL)
 
 	usedDictionaryProcess->next = NULL;
 
+	//links the first dictinary process to the linked list
 	if (dictionaryProcess_Head == NULL) {
 
 		usedDictionaryProcess->countDictionaryProcess = 1;
@@ -44,9 +46,12 @@ void MakeProcessDictionary(PROCESS* useProcessInDLL)
 }
 
 
-
+//get process who used the same dlls and links his name to a dictinary process linked list
+//add a dictinary dll that the process used and the process
 void addDictionaryProcess(dictionaryDLL* locationDLL, PROCESS* namePro)
 {
+	//Taking the tail of the dictionary process linked list from the dictinary dll
+	//links the new dictionary process to the linked list
 	S_dictionaryProcess* D_processTail = locationDLL->dictionaryProcessTail;
 	S_dictionaryProcess* newProcessInList = (S_dictionaryProcess*)malloc(sizeof(S_dictionaryProcess));
 	strcpy(newProcessInList->nameOfProcess, namePro->nameOfProcess);
