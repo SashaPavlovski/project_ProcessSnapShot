@@ -4,6 +4,7 @@
 #include "typesStructs.h"
 #include "displayFunction.h"
 #include "homePageHTML.h"
+#include "operationFunction.h"
 
 #pragma warning(disable:4996)
 
