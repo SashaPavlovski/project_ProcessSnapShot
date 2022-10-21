@@ -3,6 +3,7 @@
 #include <string.h>
 #include "homePageHTML.h"
 #include "homePageDLL.h"
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 

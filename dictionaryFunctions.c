@@ -4,6 +4,7 @@
 #include "typesStructs.h"
 #include "oneSnapShot.h"
 #include "dictionaryFunctions.h"
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 dictionaryDLL* dictionaryDLL_Head = NULL;

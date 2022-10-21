@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h> 
-#include <time.h>
 #include "typesStructs.h"
 #include "typesFilesHeader.h"
 #include "fileFunction.h"
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 snapShotHeader* snapShotHeaderFile = NULL;
@@ -11,6 +11,7 @@ processHeader* processHeaderFile = NULL;
 DLLNameHeaders* DLLHeaderFile = NULL;
 
 char fileName[50] = "";
+//Uploads the samples into a file
 void uploadSnapToFile() 
 {
 	int write;

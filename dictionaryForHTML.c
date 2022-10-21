@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include "typesStructs.h"
 #include "homePageHTML.h"
 #include "oneSnapShot.h"
@@ -8,6 +7,7 @@
 #include "operationFunction.h"
 #include "dinamicHomePage.h"
 #include "homePageDLL.h"
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 

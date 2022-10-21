@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
 #include "typesStructs.h"
 #include "oneSnapShot.h"
 #include "typesFilesHeader.h"
@@ -8,6 +7,7 @@
 #include "structHeaderFunction.h"
 #include "SnapShotList.h"
 #include "dictionaryFunctions.h"
+#include "logFile.h"
 #pragma warning(disable:4996)
 
  PROCESS* PROCESS_Head = NULL;

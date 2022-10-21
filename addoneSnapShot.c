@@ -9,7 +9,7 @@
 #include "operationFunction.h"
 #include "homePageHTML.h"
 #include "displayFunction.h"
-
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 snapshot* snapshot_Head = NULL;
@@ -18,11 +18,16 @@ snapshot* snapshot_Tail = NULL;
 int countOfSnapsNumber = 0;
 int loadFormFile = 0;
 int titleProcesses = 0;
+extern char str[100] = "";
 
 //get new SnapShot and links it to a snapsot linked list if we download from a file
 //or create a new Snapchat
 void addOneSnapShot(snapshot* newSnapShotFromFile)
 {
+	time_t t;
+	time(&t);
+	struct tm* timeinfo;
+	timeinfo = localtime(&t);
 	//creates a new place in memory
 	newSnapShot = (snapshot*)malloc(sizeof(snapshot));
 	if (!newSnapShot)
@@ -38,6 +43,9 @@ void addOneSnapShot(snapshot* newSnapShotFromFile)
 	//Enter only if it does not download from a file
 	if (loadFormFile == 0)
 	{
+		//Saving the sampling start time
+		sprintf(str, "%d.%d.%d/%d:%d:%d", timeinfo->tm_mday, timeinfo->tm_mon + 1, timeinfo->tm_year + 1900, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+
 		//creates a linked list of processors
 		getProcessesInfo();
 

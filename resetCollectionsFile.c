@@ -1,20 +1,21 @@
 #include <stdlib.h> 
 #include <stdio.h>
-#include <time.h>
 #include "typesStructs.h"
 #include "resetCollectionsFile.h"
 #include "structHeaderFunction.h"
 #include "homePageHTML.h"
+#include "logFile.h"
 #pragma warning(disable:4996)
 
-
+//deletes all created samples
+//gets the head of the first sample
 void resetCollections(snapshot* headSanpSot)
 {
 	firstTimeInFile = 0;
 	firstTimeHomePage = 0;
-	//free(newNameOfFile);
-	saveInToFileHTML(readFromFile());
+	//sign to delete the place of the header structs
 	restet = 1;
+	//delete the place of the header structs
 	headerMalloc();
 	snapshot* currentSnapShot = headSanpSot;
 	PROCESS* currentProcess;

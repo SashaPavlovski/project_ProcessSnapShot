@@ -1,9 +1,8 @@
 #include <stdlib.h> 
 #include <stdio.h>
-#include <time.h>
 #include "typesStructs.h"
 #include "operationFunction.h"
-
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 //Summarize all count dlls in each process

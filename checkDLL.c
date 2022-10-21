@@ -1,8 +1,8 @@
 #include <string.h>
 #include <stdio.h>
-#include <time.h>
 #include "typesStructs.h"
 #include "SnapShotList.h"
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 extern int ExistsDLL = 0;

@@ -2,6 +2,7 @@
 #include <stdlib.h> 
 #include "typesStructs.h"
 #include"oneSnapShot.h"
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 

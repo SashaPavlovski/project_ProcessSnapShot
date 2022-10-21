@@ -1,7 +1,6 @@
-
 #include <windows.h>
 #include <psapi.h>
-
+#pragma onces
 
 typedef struct _DLLName {
 	char nameOfDLL[300];
@@ -80,7 +79,7 @@ extern int FirstListProcess;
 extern int processNotExist;
 
 extern int userResponse;
-extern char str[100];
+
 
 
 extern snapshot* newSnapShot;
@@ -117,6 +116,6 @@ typedef struct _dictionaryDLL {
 extern dictionaryDLL* dictionaryDLL_Head;
 extern dictionaryDLL* dictionaryDLL_Tail;
 
-#pragma onces
+
 
 

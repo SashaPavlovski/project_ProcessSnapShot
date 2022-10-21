@@ -1,3 +1,5 @@
+#pragma once
+
 //types
 extern char fileName[50];
 #define versionOfSnapShot 1
@@ -6,4 +8,3 @@ extern char fileName[50];
 extern int loadFormFile;
 
 
-#pragma once

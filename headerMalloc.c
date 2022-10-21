@@ -3,6 +3,7 @@
 #include "typesStructs.h"
 #include "resetCollectionsFile.h"
 #include "structHeaderFunction.h"
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 

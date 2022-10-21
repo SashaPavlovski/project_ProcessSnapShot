@@ -1,17 +1,16 @@
 #include <stdio.h>
-#include <time.h>
 #include "typesStructs.h"
 #include "typesFilesHeader.h"
 #include "fileFunction.h"
 #include "oneSnapShot.h"
 #include "resetCollectionsFile.h"
 #include "homePageHTML.h"
-
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 snapshot* newSnapShot = NULL;
 PROCESS* newProcess = NULL;
-
+//reads from the file the header, the snapShot, the processes and the dll into the program
 void loadSnapFromFile()
 {
 	printf("enter name for file\n");
@@ -23,7 +22,9 @@ void loadSnapFromFile()
 		printf("The file did not open");
 		return 1;
 	}
+	//sign to the add functions that this is loadFormFile.
 	loadFormFile = 1;
+
 	snapShotHeader* loadSnapShotHeaderFile;
 	loadSnapShotHeaderFile = (snapShotHeader*)malloc(sizeof(snapShotHeader));
 	if (!loadSnapShotHeaderFile)
@@ -129,13 +130,15 @@ void loadSnapFromFile()
 
 				addDLL(currentDLL->nameOfDLL);
 			}
-			Sleep(1000);
+			
 			newProcess->dll = DLLName_Head;
 			newProcess->dllTail = DLLName_Tail;
 		}
-		Sleep(1000);
+		
 		newSnapShot->myprocess = PROCESS_Head;
 		newSnapShot->countOfProcess = PROCESS_Tail->countProcess;
+
+		//after it end reading Snapshot,creates html pages
 		creatingHtml();
 	}
 

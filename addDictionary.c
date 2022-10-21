@@ -3,6 +3,7 @@
 #include <string.h>
 #include "typesStructs.h"
 #include "dictionaryFunctions.h"
+#include "logFile.h"
 #pragma warning(disable : 4996)
 
 S_dictionaryProcess* dictionaryProcess_Head = NULL;
@@ -16,7 +17,7 @@ void MakeProcessDictionary(PROCESS* useProcessInDLL)
 	if (useProcessInDLL == NULL)
 	{
 		dictionaryProcess_Head = NULL;
-		return;
+		return 1;
 	}
 
 	PROCESS* useProcess = useProcessInDLL;

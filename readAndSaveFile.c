@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "homePageHTML.h"
-
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 
@@ -15,52 +15,49 @@ int countOfCreateFileIndex3 = 1;
 //know which file to open
 char* newNameOfFile = 0;
 
-
+//reads from the file
 char* readFromFile() {
 	
-
-	if (firstTimeInFile == 0 && strcmp(nameFile, "index.html") != 0)
-	{
+	//open the file to count how many chars it has
+	if (firstTimeInFile == 0 && strcmp(nameFile, "index.html") != 0){
+		//If it's not the home page and it's the first time
 		fileR = fopen(nameFile, "r");
-		if (!fileR)
-		{
-			return NULL;
+		if (!fileR){
+			//error
+			return 1;
 		}
 
 	}
-	else if (firstTimeHomePage == 0&& firstTimeInFile == 0)
-	{
+	else if (firstTimeHomePage == 0&& firstTimeInFile == 0){
+		//If it's the home page and it's the first time
 		fileR = fopen(nameFile, "r");
-		if (!fileR)
-		{
-			return NULL;
+		if (!fileR){
+			//error
+			return 1;
 		}
 	}
-	else if (strcmp(nameFile,"index.html")==0)
-	{
+	else if (strcmp(nameFile,"index.html")==0){
+		//it's index.html and it's not the first time
 		fileR = fopen("homePage.html", "r");
-		if (!fileR)
-		{
+		if (!fileR){
 			//error
-			return 0;
+			return 1;
 		}
 	}
-	else if (strcmp(nameFile, "index2.html") == 0)
-	{
+	else if (strcmp(nameFile, "index2.html") == 0){
+		//it's index2.html and it's not the first time
 		fileR = fopen(newNameOfFile, "r");
-		if (!fileR)
-		{
+		if (!fileR){
 			//error
-			return 0;
+			return 1;
 		}
 	}
-	else if (strcmp(nameFile,"index3.html") == 0)
-	{
+	else if (strcmp(nameFile,"index3.html") == 0){
+		//it's index3.html and it's not the first time
 		fileR = fopen(newNameOfFile, "r");
-		if (!fileR)
-		{
+		if (!fileR){
 			//error
-			return 0;
+			return 1;
 		}
 	}
 
@@ -68,14 +65,14 @@ char* readFromFile() {
 
     // Get the file size
     char* charCount = (char*)malloc(10000);
-	if (!charCount)
-	{
+	if (!charCount){
+		//error
 		return 1;
 	}
     char* read;
     int fileSize = 0;
-    while ((read = fgets(charCount, 1000, fileR)))
-    {
+    while ((read = fgets(charCount, 1000, fileR))){
+
 	    fileSize += strlen(charCount);
     }
     
@@ -88,64 +85,63 @@ char* readFromFile() {
 
     // alloc space as file size
 	char* inThefile = (char*)malloc(fileSize);
-	if (!inThefile)
-	{
+	if (!inThefile){
 		return 1;
 	}
 
 
 
-
-	if (firstTimeInFile == 0 && strcmp(nameFile, "index.html") != 0)
-	{
+	//open the file to read the file into a variable
+	if (firstTimeInFile == 0 && strcmp(nameFile, "index.html") != 0){
 		fileR = fopen(nameFile, "r");
-		if (!fileR)
-		{
-			return NULL;
+		if (!fileR){
+			//error
+			return 1;
 		}
 
 	}
-	else if (firstTimeHomePage == 0 && firstTimeInFile == 0)
-	{
+	else if (firstTimeHomePage == 0 && firstTimeInFile == 0){
+	
 		firstTimeHomePage = 1;
 		fileR = fopen(nameFile, "r");
-		if (!fileR)
-		{
-			return NULL;
+		if (!fileR){
+		
+			//error
+			return 1;
 		}
 	}
-	else if (strcmp(nameFile, "index.html") == 0)
-	{
+	else if (strcmp(nameFile, "index.html") == 0){
+	
 		fileR = fopen("homePage.html", "r");
-		if (!fileR)
-		{
+		if (!fileR) {
+		
 			//error
-			return 0;
+			return 1;
 		}
 	}
-	else if (strcmp(nameFile, "index2.html") == 0)
-	{
+	else if (strcmp(nameFile, "index2.html") == 0){ 
+	
 		fileR = fopen(newNameOfFile, "r");
-		if (!fileR)
-		{
+		if (!fileR) {
+		
 			//error
-			return 0;
+			return 1;
 		}
 	}
-	else if (strcmp(nameFile, "index3.html") == 0)
-	{
+	else if (strcmp(nameFile, "index3.html") == 0) {
+	
 		fileR = fopen(newNameOfFile, "r");
-		if (!fileR)
-		{
+		if (!fileR) {
+		
 			//error
-			return 0;
+			return 1;
 		}
 	}
 
     int readPosition = 0;
     char charToRead;
-    while ((charToRead = fgetc(fileR)) != EOF)
-    {
+    while ((charToRead = fgetc(fileR)) != EOF) {
+    
 		inThefile[readPosition] = charToRead;
     	readPosition++;
     }
@@ -153,22 +149,24 @@ char* readFromFile() {
 	
     
     fclose(fileR);
+	//returns the variable
     return inThefile;
 
 }
 
 
 
+//saves what is created in a file
+//Gets the variable
+char* saveInToFileHTML(char* newFile) {
+	LogEvent("enter the function saveInToFileHTML");
 
-char* saveInToFileHTML(char* newFile)
-{
-	//enter the function PhotoCopying
-	if (strcmp(nameFile, "index.html") == 0)
-	{
+	if (strcmp(nameFile, "index.html") == 0) {
+
 	   file = fopen("homePage.html", "w");
-	   if (!file)
-	   {
-	    	//error - The file (PhotoCopying.html) did not open
+	   if (!file) {
+	   
+	    	//error - The file (homePage.html) did not open
 	    	return 1;
 	   }
 
@@ -177,11 +175,11 @@ char* saveInToFileHTML(char* newFile)
 	   fclose(file);
 	  
     }
-    else if (strcmp(nameFile, "index2.html") == 0)
-    {
+    else if (strcmp(nameFile, "index2.html") == 0) {
+    
         file = fopen(newNameOfFile, "w");
-        if (!file)
-        {
+        if (!file) {
+        
         	//error - The file (PhotoCopying.html) did not open
 			return 1;
         }
@@ -190,11 +188,11 @@ char* saveInToFileHTML(char* newFile)
         fputs(newFile, file);
         fclose(file);
     }
-	else if (strcmp(nameFile, "index3.html") == 0)
-	{
+	else if (strcmp(nameFile, "index3.html") == 0) {
+	
 		file = fopen(newNameOfFile, "w");
-		if (!file)
-		{
+		if (!file) {
+		
 			//error - The file (PhotoCopying.html) did not open
 			return 1;
 		}
@@ -203,13 +201,14 @@ char* saveInToFileHTML(char* newFile)
 		fputs(newFile, file);
 		fclose(file);
 	}
-	else
-	{
+	else {
+	
 		//no exist file
 		printf("no exist file\n");
 		return 1;
 	}
 	free(newFile);
+	//Sends the name of the saved file
 	return newNameOfFile;
 	//The file (PhotoCopying.html) is closed, the function PhotoCopying is finished
 }
@@ -219,27 +218,27 @@ char* saveInToFileHTML(char* newFile)
 
 
 
-
+//creates a new name for the files
 char* createNewName(char* nameOfOriginFile) {
 
 	char* newNameFile = (char*)malloc(30);
 
-	if (strcmp(nameOfOriginFile, "index2.html") == 0)
-	{
+	if (strcmp(nameOfOriginFile, "index2.html") == 0) {
+	
 	    sprintf(newNameFile, "samplePage_%d.html", countOfCreateFileIndex2);
 	    countOfCreateFileIndex2++;
 
 	    return newNameFile;
 	}
-	else if (strcmp(nameOfOriginFile, "index3.html") == 0)
-	{
+	else if (strcmp(nameOfOriginFile, "index3.html") == 0) {
+	
 		sprintf(newNameFile, "useDll_%d.html", countOfCreateFileIndex3);
 		countOfCreateFileIndex3++;
 
 		return newNameFile;
 	}
-	else
-	{
+	else {
+	
 		return NULL;
 	}
 }

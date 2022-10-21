@@ -1,11 +1,10 @@
 #include <stdlib.h> 
 #include <stdio.h>
-#include <time.h>
 #include "typesStructs.h"
 #include "displayFunction.h"
 #include "homePageHTML.h"
 #include "operationFunction.h"
-
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 

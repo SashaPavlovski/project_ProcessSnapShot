@@ -1,11 +1,11 @@
 #include <stdlib.h> 
 #include <stdio.h>
-#include <time.h>
 #include "typesStructs.h"
 #include "typesFilesHeader.h"
 #include "SnapShotList.h"
 #include "structHeaderFunction.h"
 #include "oneSnapShot.h"
+#include "logFile.h"
 #pragma warning(disable:4996)
 
 //resets the head and tail of dll
