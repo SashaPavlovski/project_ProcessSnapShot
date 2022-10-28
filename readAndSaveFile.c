@@ -270,7 +270,7 @@ char* createNewName(char* nameOfOriginFile) {
 	    countOfCreateFileIndex2++;
 
 
-		LogEventWithVariable("The function (createNewName) is done, name of file", newNameOfFile);
+		LogEventWithVariable("The function (createNewName) is done, name of file", newNameFile);
 		Loglinebreak();
 
 	    return newNameFile;
@@ -281,7 +281,7 @@ char* createNewName(char* nameOfOriginFile) {
 		countOfCreateFileIndex3++;
 
 
-		LogEventWithVariable("The function (createNewName) is done, name of file", newNameOfFile);
+		LogEventWithVariable("The function (createNewName) is done, name of file", newNameFile);
 		Loglinebreak();
 
 		return newNameFile;
