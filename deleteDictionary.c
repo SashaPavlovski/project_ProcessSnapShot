@@ -8,8 +8,11 @@
 
 
 //Resets the dctionary dll and dctionary processes
-void deleteDictionaryDLLAndPro()
-{
+void deleteDictionaryDLLAndPro(){
+
+	Loglinebreak();
+	LogEvent("enter the function (deleteDictionaryDLLAndPro)");
+
 	dictionaryDLL* currDictionary = dictionaryDLL_Head;
 	dictionaryDLL* OldCurrDictionary;
 	S_dictionaryProcess* currDictionaryPro = currDictionary->dictionaryProcessUsed;
@@ -29,6 +32,7 @@ void deleteDictionaryDLLAndPro()
 		free(OldCurrDictionary);
 	}
 
+	LogEvent("The function (deleteDictionaryDLLAndPro) is done and deleted all the dictionary dll and dictionary processes\n");
 }
 	
 		

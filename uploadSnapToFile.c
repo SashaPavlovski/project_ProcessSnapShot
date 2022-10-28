@@ -12,8 +12,11 @@ DLLNameHeaders* DLLHeaderFile = NULL;
 
 char fileName[50] = "";
 //Uploads the samples into a file
-void uploadSnapToFile() 
-{
+void uploadSnapToFile() {
+
+	Loglinebreak();
+	LogEvent("enter the function (uploadSnapToFile)");
+
 	int write;
 	if (snapShotHeaderFile->versionSnapShot == NULL )
 	{
@@ -30,7 +33,7 @@ void uploadSnapToFile()
 		exit(1);
 	}
 
-
+	LogEvent("The file is opened for writing");
 
 	write = fwrite(snapShotHeaderFile,sizeof(snapShotHeader),1,f);
 	if (!write)
@@ -52,6 +55,8 @@ void uploadSnapToFile()
 		return;
 	}
 
+	LogEvent("all the header structs were read");
+
 
 	snapshot* currentSnapShot = snapshot_Head;
 	PROCESS* currentProcess = currentSnapShot->myprocess;
@@ -65,6 +70,7 @@ void uploadSnapToFile()
 			 //error
 			 return;
 		 }
+		 LogEventWithNumber("Read snapShot", currentSnapShot->countSnapsNumber);
 
 		 currentProcess = currentSnapShot->myprocess;
 
@@ -76,6 +82,7 @@ void uploadSnapToFile()
 				 //error
 				 return;
 			 }
+			 LogEventWithNumber("load process", currentProcess->countProcess);
 
 			 currentDLL = currentProcess->dll;
 
@@ -87,7 +94,8 @@ void uploadSnapToFile()
 					 //error
 					 return;
 				 }
-				 
+				 LogEventWithNumber("load dll", currentDLL->countDLL);
+
 				 currentDLL = currentDLL->next;
 			 }
 
@@ -99,6 +107,8 @@ void uploadSnapToFile()
 		currentSnapShot = currentSnapShot->next;
 	}
 	fclose(f);
+
+	LogEvent("The file is closed and the function (uploadSnapToFile) is done\n");
 }
 
 

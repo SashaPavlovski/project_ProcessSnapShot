@@ -9,15 +9,20 @@
 
 int restet = 0;
 //Creates space to header structs
-void headerMalloc()
-{
+void headerMalloc(){
+
+	Loglinebreak();
+	LogEvent("enter the function (headerMalloc)");
+
 	//sign that resets the space to header structss
-	if (restet == 1)
-	{
+	if (restet == 1){
+	
 		restet = 0;
 		free(snapShotHeaderFile);
 		free(processHeaderFile);
 		free(DLLHeaderFile);
+		LogEvent("headerMalloc were released");
+		LogEvent("The function (headerMalloc) is done\n");
 		return;
 	}
 
@@ -44,5 +49,5 @@ void headerMalloc()
 		return;
 	}
 
-
+	LogEvent("The function (headerMalloc) is done and created 3 Allocations for header stucts\n");
 }

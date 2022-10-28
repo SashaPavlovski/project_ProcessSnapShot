@@ -17,20 +17,26 @@ extern PROCESS* sortListProcess = NULL;
 
 //Builds the home page
 //Builds the dll pages
-void HtmlPage()
-{
+void HtmlPage(){
+
+	Loglinebreak();
+	LogEvent("enter the function (HtmlPage)");
+
 	//Resetting the count of the dll files
 	countOfCreateFileIndex3 = 0;
 
 	//Reset the PROCESS_Head 
 	addProcess(NULL);
+	LogEvent("back to function (HtmlPage)");
 
 	//Reset the dictionaryDLL_Head 
 	addDictionaryDLL(NULL, NULL);
+	LogEvent("back to function (HtmlPage)");
 
 	//creating a linked list of single-valued processes
 	//add a first snapshot
 	dictionaryProcess(snapshot_Head);
+	LogEvent("back to function (HtmlPage)");
 
 	//Saving in a variable the new process linked list
 	sortListProcess = PROCESS_Head;
@@ -40,15 +46,18 @@ void HtmlPage()
 	//creating a linked list of single-valued dll which includes the processes that used it dll.
 	//add a first new process that already single-valued in linked list
 	dictionaryDLLFunction(sortListProcess);
+	LogEvent("back to function (HtmlPage)");
 
 
 	int amountDictionaryDLL = dictionaryDLL_Tail->countDictionaryDLL;
 
 	//Calculates the average all the memory that the processes use in all the samples together
 	SIZE_T averageProcessM = (SIZE_T)memoryAvgForALLSnapshot();
+	LogEvent("back to function (HtmlPage)");
 
 	//Creates on the home page the Dll's cnt, Processes cnt and Memory avg
 	char* dataNav = dynamicNav(amountDictionaryDLL, amountProcesses, averageProcessM);
+	LogEvent("back to function (HtmlPage)");
 
 	//update that is not the first time that we want to save something on the home page
 	firstTimeHomePage = 1;
@@ -56,11 +65,14 @@ void HtmlPage()
 	firstTimeInFile = 1;
 	//Save the nav data on the home page
 	dynamicNavHtml("index.html",dataNav);
+	LogEvent("back to function (HtmlPage)");
 
 	dictionaryDLL* currDD = dictionaryDLL_Head;
 	firstTimeInFile = 0;
-	while (currDD != NULL)
-	{
+
+	LogEvent("enter to loop that create processes pages for each dictionary dll");
+	while (currDD != NULL){
+	
 		//create title for the page
 		char* titleDLL = dinamicTitleProcessesUsed(currDD);
 
@@ -74,25 +86,32 @@ void HtmlPage()
 		firstTimeInFile = 0;
 		currDD = currDD->next;
 	}
+	LogEvent("back to function (HtmlPage) and created the pages");
 
 	//Saving the dll table on the home page
 	char* nameF = dynamicHtml("index.html",dynamicDLLTable(dictionaryDLL_Head), NULL);
+
+	LogEvent("The function (HtmlPage) is done and created a processes pages on the home pages\n");
 }
 
 
 //Creates html line whit Dll's cnt, Processes cnt and Memory avg
-char* dynamicNav(int DLLCountHTML, int ProceessCountHTML, SIZE_T MemoryAvgHTML)
-{
+char* dynamicNav(int DLLCountHTML, int ProceessCountHTML, SIZE_T MemoryAvgHTML){
+
+	Loglinebreak();
+	LogEvent("enter the function (dynamicNav)");
+
 	char* dataNav = (char*)malloc(sizeof(long));
 	dataNav[0] = NULL;
-	if (!dataNav)
-	{
+	if (!dataNav){
+	
 		//error
 		return ;
 	}
 	sprintf(dataNav,"\n<div> Dll's cnt: %d </div>\n<div> Processes cnt: %d </div>\n<div> Memory avg: %d </div>\n", DLLCountHTML, ProceessCountHTML, MemoryAvgHTML);
 
 	//Returns the line
+	LogEvent("The function (dynamicNav) is done and created dlls cnt, Processes cnt and Memory avg\n");
 	return dataNav;
 }
 
@@ -100,25 +119,27 @@ char* dynamicNav(int DLLCountHTML, int ProceessCountHTML, SIZE_T MemoryAvgHTML)
 
 //Creates the table of single-valued dlls
 //add a dictionaryDLL_Head
-char* dynamicDLLTable(dictionaryDLL* D_DLLHeadHtml)
-{
-	
+char* dynamicDLLTable(dictionaryDLL* D_DLLHeadHtml){
+
+	Loglinebreak();
+	LogEvent("enter the function (dynamicDLLTable)");
+
 	dictionaryDLL* currDictionaryDLL = D_DLLHeadHtml;
 	char* dataDLLTable = (char*)malloc(500);
 	char* allTheOptions = (char*)malloc(sizeof(dictionaryDLL) * dictionaryDLL_Tail->countDictionaryDLL+100);
-	if (!allTheOptions)
-	{
+	if (!allTheOptions){
+	
 		//error
 		return;
 	}
 	allTheOptions[0] = NULL;
-	while (currDictionaryDLL != NULL)
-	{
+	while (currDictionaryDLL != NULL){
+	
 		//Count the number of dictionary dll
 		countDLLPageHTML++;
 
-	    if (!dataDLLTable)
-	    {
+	    if (!dataDLLTable){
+	    
 	    	//error
 	    	return;
 	    }
@@ -131,6 +152,9 @@ char* dynamicDLLTable(dictionaryDLL* D_DLLHeadHtml)
 	}
 	free(dataDLLTable);
 
+	LogEventWithNumber("The function (dynamicDLLTable) is done and created single-valued dlls table , number of dlls in table is", countDLLPageHTML);
+	Loglinebreak();
+
 	//returns the entire created table
 	return allTheOptions;
 }
@@ -138,17 +162,23 @@ char* dynamicDLLTable(dictionaryDLL* D_DLLHeadHtml)
 
 //Creates the title of used processes count in one dictionary dll
 //add a dictionary dll
-char* dinamicTitleProcessesUsed(dictionaryDLL* oneDictionaryDLL)
-{
+char* dinamicTitleProcessesUsed(dictionaryDLL* oneDictionaryDLL){
+
+	Loglinebreak();
+	LogEvent("enter the function (dinamicTitleProcessesUsed)");
+
 
 	char* titelProcesses = (char*)malloc(100);
 	titelProcesses[0] = NULL;
-	if (!titelProcesses)
-	{
+	if (!titelProcesses){
+	
 		//error
 		return;
 	}
 	sprintf(titelProcesses, "<h1> %d process used </h1>", oneDictionaryDLL->dictionaryProcessTail->countDictionaryProcess);
+
+	LogEventWithNumber("The function (dinamicTitleProcessesUsed) is done and created single-valued dlls title , number of dll is", countDLLPageHTML);
+	Loglinebreak();
 
 	//Returns the title
 	return titelProcesses;
@@ -159,33 +189,39 @@ char* dinamicTitleProcessesUsed(dictionaryDLL* oneDictionaryDLL)
 
 //Creates the table of used processes name in one dictionary dll
 //add a dictionary dll
-char* dinamicTableProcessesUsed(dictionaryDLL* oneDictionaryDLL)
-{
+char* dinamicTableProcessesUsed(dictionaryDLL* oneDictionaryDLL){
+
+	Loglinebreak();
+	LogEvent("enter the function (dinamicTableProcessesUsed)");
+
 	S_dictionaryProcess* processesOfDDLL = oneDictionaryDLL->dictionaryProcessUsed;
 	char* tableProcesses = (char*)malloc(10000);
 	tableProcesses[0] = NULL;
-	char* allTheOptions = (char*)malloc(sizeof(S_dictionaryProcess)* oneDictionaryDLL->dictionaryProcessTail->countDictionaryProcess + 100000);
+	char* allTheOptions = (char*)malloc(sizeof(S_dictionaryProcess) * oneDictionaryDLL->dictionaryProcessTail->countDictionaryProcess + 100000);
 	allTheOptions[0] = NULL;
-	if (!allTheOptions)
-	{
+	if (!allTheOptions){
+	
 		//error
 		return;
 	}
-	while (processesOfDDLL != NULL)
-	{
+	while (processesOfDDLL != NULL){
+	
 
-	     if (!tableProcesses)
-	     {
+	     if (!tableProcesses){
+	     
 	     	//error
 	     	return;
 	     }
 	     sprintf(tableProcesses, "\n<tr>\n<td> %d </td>\n<td> %s </td>\n</tr>\n", processesOfDDLL->countDictionaryProcess, processesOfDDLL->nameOfProcess);
-		 processesOfDDLL = processesOfDDLL->next;\
+		 processesOfDDLL = processesOfDDLL->next;
 
 		 //Connects each line that is created (tableProcesses) to one place (allTheOptions)
 		 strcat(allTheOptions, tableProcesses);
 	}
 	free(tableProcesses);
+
+	LogEventWithNumber("The function (dinamicTableProcessesUsed) is done and created processes tables for each dictionary dll , number process is", processesOfDDLL->countDictionaryProcess);
+	Loglinebreak();
 
 	//returns the entire created table
 	return allTheOptions;

@@ -7,14 +7,14 @@
 #pragma warning(disable:4996)
 
 int FirstListProcess = 0;
-
+char* variable = "";
 
 // get the memory usage for process, ID, name of process, names of is dll
 // Calls two functions, that create a linked list of DLLs and processes
 // get ID process
 void getMemoryInfo(DWORD processID){
 
-	LogEvent("enter the function getMemoryInfo");
+	LogEvent("enter the function (getMemoryInfo)");
 
 	//create a new variable
 	PROCESS* ret = (PROCESS*)malloc(sizeof(PROCESS));
@@ -27,10 +27,13 @@ void getMemoryInfo(DWORD processID){
 	ret->next = NULL;
 
 	//add the process Id into the new variable
-	LogEvent("add the process Id into the new variable");
+
+	variable = (char*)malloc(sizeof(processID));
+	sprintf(variable, "%lu", processID);
+	LogEventWithVariable("add the process Id into the new variable", variable);
 	ret->processId = processID;
 
-
+	
 	// Open process in order to receive information
 	hProcess = OpenProcess(PROCESS_QUERY_INFORMATION |
 		PROCESS_VM_READ,
@@ -40,6 +43,7 @@ void getMemoryInfo(DWORD processID){
 		// Write to log a warning
 		return;
 	}
+	Loglinebreak();
 	LogEvent("geted a pointer to a process");
 	HMODULE hMods[1024];
 	DWORD cbNeeded;
@@ -101,18 +105,20 @@ void getMemoryInfo(DWORD processID){
 			// "name of the dll"
 			if (GetModuleFileNameEx(hProcess, hMods[i], wDllName, MAX_PATH)){
 
-				LogEvent("add the dll name into the new variable");
 				char dllName[MAX_PATH];
 				size_t numConverted;
 				wcstombs_s(&numConverted, dllName, MAX_PATH, wDllName, MAX_PATH);
-				LogEvent("add the dll name into dllName array");
 				// get a name and links it to a dll linked list
+				Loglinebreak();
 				addDLL(dllName);
 
 			}
 		}
+		LogEvent("back to function (getMemoryInfo)");
+		LogEventWithNumber("done creating a linked list of all dll name for the process, The count of dll is", DLLName_Tail->countDLL);
 	}
-	LogEvent("return to function getMemoryInfo");
+
+
 	LogEvent("add the dllTail into the new variable");
 	//add the DLLName_Tail, DLLName_Head, countDLL into the new variable
 	ret->dllTail = DLLName_Tail;
@@ -123,12 +129,14 @@ void getMemoryInfo(DWORD processID){
 
     //Close the process
 	CloseHandle(hProcess);
-	LogEvent("the process is closed");
+	variable = (char*)malloc(sizeof(processID));
+	sprintf(variable, "%lu", processID);
+	LogEventWithVariable("the process is closed", variable);
 
 	//get the new variable and links it to a process linked list
-	LogEvent("Putting the variable into the function");
+	LogEvent("transfer the variable into the function (addProcess)");
 	addProcess(ret);
-	LogEvent("The file (getMemoryInfo) is closed, the function getMemoryInfo is finished");
+	LogEvent("The function (getMemoryInfo) is done\n");
 }
 
 
@@ -139,13 +147,13 @@ void getMemoryInfo(DWORD processID){
 //the choice is made by the user
 void getProcessesInfo(){
 
-	LogEvent("enter the function getProcessesInfo");
+	LogEvent("enter the function (getProcessesInfo)");
 	//Get Processes
 	DWORD aProcesses[1024] = { 0 };
 	DWORD cbNeeded, cProcesses;
 
 	//Receive all process ID and put in aProcesses Array
-	LogEvent("Loads all processes to the array");
+	LogEvent("Loads all processes to the array\n");
 	if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded)){
 		// Error. Write to log
 		LogError("The function failed to exit the processes");
@@ -159,7 +167,8 @@ void getProcessesInfo(){
 	// and connecting the struct to process linked list
 
 	if (userResponse == 1){
-		LogError("Inserting the processes into the loop that enters the function getMemoryInfo");
+		LogEvent("enter to for of one SnapShot");
+		LogEvent("Inserting the processes into the loop that enters the function (getMemoryInfo)\n");
 		// Loop of all processes
 		for (int y = 0; y < cProcesses; y++){
 		
@@ -169,7 +178,8 @@ void getProcessesInfo(){
 		}
 	}
 	else if (userResponse == 2){
-		LogError("Inserting the processes into the loop that enters the function getMemoryInfo");
+		LogEvent("enter to for of 20 SnapShots");
+		LogEvent("Inserting the processes into the loop that enters the function (getMemoryInfo)\n");
 		// sign that the first process linked list has been created
 		FirstListProcess = 0;
 
@@ -186,7 +196,7 @@ void getProcessesInfo(){
 			FirstListProcess++;
 
 			//Stops all processes on the computer for a second
-			LogEvent("Pauses the processes on the computer for a second");
+			LogEvent("Pauses the processes on the computer for a second\n");
 			Sleep(1000);
 
 			//reloads the processes again
@@ -203,7 +213,8 @@ void getProcessesInfo(){
 
 	}
 	else{
-		LogError("Inserting the processes into the loop that enters the function getMemoryInfo");
+		LogEvent("enter to for of long SnapShot");
+		LogEvent("Inserting the processes into the loop that enters the function (getMemoryInfo)\n");
         //enter if the user presses 3
 
 	    // sign that the first process linked list has been created
@@ -232,11 +243,11 @@ void getProcessesInfo(){
 				stop = getch();
 			}
 
-			LogEvent("Pauses the processes on the computer for a second");
+			LogEvent("Pauses the processes on the computer for a second\n");
 			Sleep(1000);
 			LogEvent("Loads all processes to the array");
 			if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded)){
-			
+				LogError(strerror(GetLastError()));
 				// Error. Write to log
 				return 1;
 			}
@@ -246,7 +257,7 @@ void getProcessesInfo(){
 		}
 
 	}
-	LogEvent("The file (getProcessesInfo) is closed, the function getProcessesInfo is finished");
+	LogEvent("The function (getProcessesInfo) is done\n");
 
 }
 

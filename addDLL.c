@@ -16,26 +16,28 @@ int countOfDll = 0;
 
 //adds a dll to the linked list
 //gets a dll name
-void addDLL(char dllName[])
-{
+void addDLL(char dllName[]){
 	// The function has started
+	LogEvent("enter the function (addDLL)");
+
 	
 	//count the dll, every time a new dll enter to function it is increases by one
 	++countOfDll;
 
 	//if the function (addDLL) gets NULL it will reset the DLLName_Head 
-	if (dllName == NULL)
-	{
+	if (dllName == NULL){
 	    //resetting the dll count
 	   	countOfDll = 0;
 		DLLName_Head = NULL;
+		LogEvent("DLLName_Head is reset dllName is NULL");
+		LogEvent("The function (addDLL) is done\n");
 		return;
 	}
 
 	//creates a new place in memory
 	DLLName* newDLL = (DLLName*)malloc(sizeof(DLLName));
-	if (!newDLL)
-	{
+	if (!newDLL){
+	
 		//error - No memory allocation
 		exit(1);
 	}
@@ -50,8 +52,8 @@ void addDLL(char dllName[])
 	newDLL->next = NULL;
 
 	//entered only when the first dll is created
-	if (DLLName_Head == NULL)
-	{
+	if (DLLName_Head == NULL){
+	
 		//save the first dll in DLLName_Head
 		DLLName_Head = newDLL;
 
@@ -61,8 +63,8 @@ void addDLL(char dllName[])
 		//There is nothing in front of newDLL because it the first
 		newDLL->prev = NULL;
 	}
-	else
-	{
+	else{
+	
 		//connecting the old dll to the new dll
 		DLLName_Tail->next = newDLL;
 
@@ -74,8 +76,12 @@ void addDLL(char dllName[])
 	
 	}
 
+
+
 	// creates a header struct for dll
-	 headerDLLDetails();
+	if(countOfDll == 1)
+    headerDLLDetails();
+	LogEventWithNumber("The function (addDLL) is done and the dll is linked, number\n", countOfDll);
 }
 
 
@@ -83,8 +89,10 @@ void addDLL(char dllName[])
 
 //add the checked dll to the origin linked list
 //get the tail dll of original process and the new dll that not in original dll linked list of the process 
-DLLName* addDLLToExistList(DLLName* TailOfExistDLL, DLLName* newList)
-{
+DLLName* addDLLToExistList(DLLName* TailOfExistDLL, DLLName* newList){
+	Loglinebreak();
+	LogEvent("enter the function (addDLLToExistList)");
+
 	//increasing the DLL by 1
 	 newList->countDLL = TailOfExistDLL->countDLL + 1;
 
@@ -100,6 +108,7 @@ DLLName* addDLLToExistList(DLLName* TailOfExistDLL, DLLName* newList)
 	 //makes the tail be the new dll
      TailOfExistDLL = newList;
 
+	 LogEvent("The function (addDLLToExistList) is done and add the checked dll to the origin linked list\n");
 	//sends the modified tail
     return TailOfExistDLL;
 }
@@ -107,11 +116,13 @@ DLLName* addDLLToExistList(DLLName* TailOfExistDLL, DLLName* newList)
 
 
 // creates a header struct
-void headerDLLDetails()
-{
+void headerDLLDetails(){
+	Loglinebreak();
+	LogEvent("enter the function (headerDLLDetails)");
 	//Updates the version of the dll struct 
 	DLLHeaderFile->versionDLLName= versionOfDLL;
 
 	//Saves space for changes in dll struct
 	DLLHeaderFile->reserve[20] = NULL;
+	LogEvent("The function (headerDLLDetails) is done and save the header of dll link list\n");
 }

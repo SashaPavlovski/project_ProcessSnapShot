@@ -12,8 +12,9 @@ S_dictionaryProcess* dictionaryProcess_Tail = NULL;
 S_dictionaryProcess* usedDictionaryProcess = NULL;
 
 //get the first process and links his name to a dictinary process linked list
-void MakeProcessDictionary(PROCESS* useProcessInDLL)
-{
+void MakeProcessDictionary(PROCESS* useProcessInDLL){
+	Loglinebreak();
+	LogEvent("enter the function (MakeProcessDictionary)");
 	if (useProcessInDLL == NULL)
 	{
 		dictionaryProcess_Head = NULL;
@@ -43,14 +44,17 @@ void MakeProcessDictionary(PROCESS* useProcessInDLL)
 
 
 	strcpy(usedDictionaryProcess->nameOfProcess, useProcess->nameOfProcess);
-	
+	LogEvent("The function (MakeProcessDictionary) is done and the first dictinary process is linked\n");
 }
 
 
 //get process who used the same dlls and links his name to a dictinary process linked list
 //add a dictinary dll that the process used and the process
-void addDictionaryProcess(dictionaryDLL* locationDLL, PROCESS* namePro)
-{
+void addDictionaryProcess(dictionaryDLL* locationDLL, PROCESS* namePro){
+
+	Loglinebreak();
+	LogEvent("enter the function (addDictionaryProcess)");
+
 	//Taking the tail of the dictionary process linked list from the dictinary dll
 	//links the new dictionary process to the linked list
 	S_dictionaryProcess* D_processTail = locationDLL->dictionaryProcessTail;
@@ -62,5 +66,7 @@ void addDictionaryProcess(dictionaryDLL* locationDLL, PROCESS* namePro)
 	newProcessInList->countDictionaryProcess = D_processTail->countDictionaryProcess + 1;
 	D_processTail = newProcessInList;
 	locationDLL->dictionaryProcessTail = newProcessInList;
+	LogEvent("The function (addDictionaryProcess) is done and the dictinary process is linked\n");
+
 }
 

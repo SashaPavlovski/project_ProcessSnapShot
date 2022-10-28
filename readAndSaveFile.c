@@ -18,8 +18,13 @@ char* newNameOfFile = 0;
 //reads from the file
 char* readFromFile() {
 	
+	Loglinebreak();
+	LogEvent("enter the function (readFromFile)");
+
 	//open the file to count how many chars it has
 	if (firstTimeInFile == 0 && strcmp(nameFile, "index.html") != 0){
+
+		LogEvent("enter if it's not the home page and it's the first time condition");
 		//If it's not the home page and it's the first time
 		fileR = fopen(nameFile, "r");
 		if (!fileR){
@@ -29,6 +34,8 @@ char* readFromFile() {
 
 	}
 	else if (firstTimeHomePage == 0&& firstTimeInFile == 0){
+
+		LogEvent("enter if it's the home page and it's the first time condition");
 		//If it's the home page and it's the first time
 		fileR = fopen(nameFile, "r");
 		if (!fileR){
@@ -37,6 +44,8 @@ char* readFromFile() {
 		}
 	}
 	else if (strcmp(nameFile,"index.html")==0){
+
+		LogEvent("enter if it's index.html and it's not the first time condition");
 		//it's index.html and it's not the first time
 		fileR = fopen("homePage.html", "r");
 		if (!fileR){
@@ -45,6 +54,8 @@ char* readFromFile() {
 		}
 	}
 	else if (strcmp(nameFile, "index2.html") == 0){
+
+		LogEvent("enter if it's index2.html and it's not the first time condition");
 		//it's index2.html and it's not the first time
 		fileR = fopen(newNameOfFile, "r");
 		if (!fileR){
@@ -53,6 +64,8 @@ char* readFromFile() {
 		}
 	}
 	else if (strcmp(nameFile,"index3.html") == 0){
+
+		LogEvent("enter if it's index3.html and it's not the first time condition");
 		//it's index3.html and it's not the first time
 		fileR = fopen(newNameOfFile, "r");
 		if (!fileR){
@@ -79,6 +92,7 @@ char* readFromFile() {
     free(charCount);
     fclose(fileR);
     fileSize += 2;
+	LogEvent("The file is closed and the memory is freed");
 
 
 
@@ -86,6 +100,7 @@ char* readFromFile() {
     // alloc space as file size
 	char* inThefile = (char*)malloc(fileSize);
 	if (!inThefile){
+
 		return 1;
 	}
 
@@ -93,6 +108,7 @@ char* readFromFile() {
 
 	//open the file to read the file into a variable
 	if (firstTimeInFile == 0 && strcmp(nameFile, "index.html") != 0){
+		LogEvent("second enter if it's not the home page and it's the first time condition");
 		fileR = fopen(nameFile, "r");
 		if (!fileR){
 			//error
@@ -102,6 +118,8 @@ char* readFromFile() {
 	}
 	else if (firstTimeHomePage == 0 && firstTimeInFile == 0){
 	
+		LogEvent("second enter if it's the home page and it's the first time condition");
+
 		firstTimeHomePage = 1;
 		fileR = fopen(nameFile, "r");
 		if (!fileR){
@@ -112,6 +130,8 @@ char* readFromFile() {
 	}
 	else if (strcmp(nameFile, "index.html") == 0){
 	
+		LogEvent("second enter if it's index.html and it's not the first time condition");
+
 		fileR = fopen("homePage.html", "r");
 		if (!fileR) {
 		
@@ -121,6 +141,8 @@ char* readFromFile() {
 	}
 	else if (strcmp(nameFile, "index2.html") == 0){ 
 	
+		LogEvent("second enter if it's index2.html and it's not the first time condition");
+
 		fileR = fopen(newNameOfFile, "r");
 		if (!fileR) {
 		
@@ -130,6 +152,8 @@ char* readFromFile() {
 	}
 	else if (strcmp(nameFile, "index3.html") == 0) {
 	
+		LogEvent("second enter if it's index3.html and it's not the first time condition");
+
 		fileR = fopen(newNameOfFile, "r");
 		if (!fileR) {
 		
@@ -149,6 +173,8 @@ char* readFromFile() {
 	
     
     fclose(fileR);
+
+	LogEvent("The file is closed and the value send, the function (readFromFile) is done\n");
 	//returns the variable
     return inThefile;
 
@@ -159,9 +185,13 @@ char* readFromFile() {
 //saves what is created in a file
 //Gets the variable
 char* saveInToFileHTML(char* newFile) {
-	LogEvent("enter the function saveInToFileHTML");
+
+	Loglinebreak();
+	LogEvent("enter the function (saveInToFileHTML)");
 
 	if (strcmp(nameFile, "index.html") == 0) {
+
+	   LogEvent("enter if it's index.html condition");
 
 	   file = fopen("homePage.html", "w");
 	   if (!file) {
@@ -176,7 +206,9 @@ char* saveInToFileHTML(char* newFile) {
 	  
     }
     else if (strcmp(nameFile, "index2.html") == 0) {
-    
+
+		LogEvent("enter if it's index2.html condition");
+
         file = fopen(newNameOfFile, "w");
         if (!file) {
         
@@ -189,7 +221,9 @@ char* saveInToFileHTML(char* newFile) {
         fclose(file);
     }
 	else if (strcmp(nameFile, "index3.html") == 0) {
-	
+
+		LogEvent("enter if it's index3.html condition");
+
 		file = fopen(newNameOfFile, "w");
 		if (!file) {
 		
@@ -208,6 +242,10 @@ char* saveInToFileHTML(char* newFile) {
 		return 1;
 	}
 	free(newFile);
+
+	LogEventWithVariable("The file is closed and the new name send, the function (saveInToFileHTML) is done, name of file", newNameOfFile);
+	Loglinebreak();
+
 	//Sends the name of the saved file
 	return newNameOfFile;
 	//The file (PhotoCopying.html) is closed, the function PhotoCopying is finished
@@ -221,12 +259,19 @@ char* saveInToFileHTML(char* newFile) {
 //creates a new name for the files
 char* createNewName(char* nameOfOriginFile) {
 
+	Loglinebreak();
+	LogEvent("enter the function (createNewName)");
+
 	char* newNameFile = (char*)malloc(30);
 
 	if (strcmp(nameOfOriginFile, "index2.html") == 0) {
 	
 	    sprintf(newNameFile, "samplePage_%d.html", countOfCreateFileIndex2);
 	    countOfCreateFileIndex2++;
+
+
+		LogEventWithVariable("The function (createNewName) is done, name of file", newNameOfFile);
+		Loglinebreak();
 
 	    return newNameFile;
 	}
@@ -235,10 +280,17 @@ char* createNewName(char* nameOfOriginFile) {
 		sprintf(newNameFile, "useDll_%d.html", countOfCreateFileIndex3);
 		countOfCreateFileIndex3++;
 
+
+		LogEventWithVariable("The function (createNewName) is done, name of file", newNameOfFile);
+		Loglinebreak();
+
 		return newNameFile;
 	}
 	else {
 	
+
+		LogEvent("The function (createNewName) is done, name of file sended NULL\n");
+
 		return NULL;
 	}
 }

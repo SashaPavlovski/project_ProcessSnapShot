@@ -9,14 +9,18 @@
 
 //deletes all created samples
 //gets the head of the first sample
-void resetCollections(snapshot* headSanpSot)
-{
+void resetCollections(snapshot* headSanpSot){
+
+	Loglinebreak();
+	LogEvent("enter the function (resetCollections)");
+
 	firstTimeInFile = 0;
 	firstTimeHomePage = 0;
 	//sign to delete the place of the header structs
 	restet = 1;
 	//delete the place of the header structs
 	headerMalloc();
+	LogEvent("back to function (resetCollections)");
 	snapshot* currentSnapShot = headSanpSot;
 	PROCESS* currentProcess;
 	DLLName* currentDLL;
@@ -47,5 +51,5 @@ void resetCollections(snapshot* headSanpSot)
 		free(oldSnapShot);
 
 	}
-
+	LogEvent("The function (resetCollections) is done and deleted all the dll, processes, snapShots and header structs\n");
 }
