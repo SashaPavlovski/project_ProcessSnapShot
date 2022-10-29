@@ -108,17 +108,17 @@ char* displayProcessesInTable(snapshot* snapShot_html) {
 			//creates a subtable of dlls for each process
 			optionOfDLL = displayDLLSInProcess(process);
 			lineInTable[0] = "";
-			sprintf(lineInTable, "<tr>\n<td> %s </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d <i class=\"fa fa-warning\" style=\"color:red\"> </i></td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td><select>\n<option selected>dll's list</option>\n%s</select></td>\n</tr>", process->nameOfProcess, process->processId, process->PageFaultCount, process->WorkingSetSize, process->QuotaPagedPoolUsage, process->QuotaPeakPagedPoolUsage, process->PagefileUsage, process->numbersOfDLL, optionOfDLL);
+			sprintf(lineInTable, "<tr>\n<td> %s </td>\n<td> %lu  </td>\n<td> %lu  </td>\n<td> %llu <i class=\"fa fa-warning\" style=\"color:red\"> </i></td>\n<td> %llu </td>\n<td>  %llu </td>\n<td>  %llu  </td>\n<td> %d </td>\n<td><select>\n<option selected>dll's list</option>\n%s</select></td>\n</tr>", process->nameOfProcess, process->processId, process->PageFaultCount, process->WorkingSetSize, process->QuotaPagedPoolUsage, process->QuotaPeakPagedPoolUsage, process->PagefileUsage, process->numbersOfDLL, optionOfDLL);
 			LogEventWithVariable("The row process in the table that takes the most memory is", process->nameOfProcess);
 		}
-		else{
-		
+		else {
+
 			//creates a subtable of dlls for each process
 			optionOfDLL = displayDLLSInProcess(process);
 			lineInTable[0] = "";
-			sprintf(lineInTable, "<tr>\n<td> %s </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n<td><select>\n<option selected>dll's list</option>\n%s</select></td>\n</tr>", process->nameOfProcess, process->processId, process->PageFaultCount, process->WorkingSetSize, process->QuotaPagedPoolUsage, process->QuotaPeakPagedPoolUsage, process->PagefileUsage, process->numbersOfDLL, optionOfDLL);
+			sprintf(lineInTable, "<tr>\n<td> %s </td>\n<td> %lu </td>\n<td> %lu </td>\n<td> %llu </td>\n<td> %llu </td>\n<td> %llu </td>\n<td> %llu </td>\n<td> %d </td>\n<td><select>\n<option selected>dll's list</option>\n%s</select></td>\n</tr>", process->nameOfProcess, process->processId, process->PageFaultCount, process->WorkingSetSize, process->QuotaPagedPoolUsage, process->QuotaPeakPagedPoolUsage, process->PagefileUsage, process->numbersOfDLL, optionOfDLL);
 		}
-		process = process->next;
+			process = process->next;
 
 		//Connects each line that is created (lineInTable) to one place (allTheProcesses)
 		strcat(allTheProcesses, lineInTable);

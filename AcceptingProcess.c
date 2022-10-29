@@ -81,7 +81,7 @@ void getMemoryInfo(DWORD processID){
 
 	// Gets the memory data and puts it in a new variable
 	if (GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc))){
-	
+
 		LogEvent("add the process memory data into the new variable");
 		ret->PageFaultCount = pmc.PageFaultCount;
 		ret->WorkingSetSize = pmc.WorkingSetSize;

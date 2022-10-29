@@ -28,7 +28,7 @@ void checkListProcess(PROCESS* CheckProcess){
 			currentProcess->QuotaPeakPagedPoolUsage += CheckProcess->QuotaPeakPagedPoolUsage;
 			currentProcess->QuotaPagedPoolUsage += CheckProcess->QuotaPagedPoolUsage;
 			currentProcess->PagefileUsage += CheckProcess->PagefileUsage;
-
+		
 			//checking between the two likned list of their dll
 			checkListDLL(currentProcess, CheckProcess->dll);
 

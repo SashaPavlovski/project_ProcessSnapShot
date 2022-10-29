@@ -1,0 +1,128 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAQElEQVQIW2P89OvDfwYo+PHjJ4zJwMHBzsAIk0SXAKkCS2KTAEu++vQSbizIKGQAl0SXAJkGlsQmAbcT2Shk+wH0sCzAEOZW1AAAAABJRU5ErkJggg==);
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+}
+h1 {
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+table,
+th,
+td,
+tr {
+  border: 1px solid #b3bfaa;
+}
+table th,
+table td {
+  padding: 15px;
+  text-align: center;
+}
+th {
+  font-size: 15px;
+}
+td {
+  font-size: 13px;
+}
+.toptitle {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  font-family: "Kanit", sans-serif;
+}
+
+a {
+  color: #739931;
+}
+table {
+  width: 100%;
+}
+table.layout {
+  border-collapse: collapse;
+}
+
+table.display th {
+  background: #d5e0cc;
+  position: sticky;
+}
+
+table.display td {
+  background: #fff;
+}
+
+div.buttomtable {
+  margin-top: 100px;
+  width: 1200px;
+  overflow-x: auto;
+}
+
+div.processName {
+  width: 300px;
+  margin: auto;
+  overflow-x: auto;
+}
+div.processId {
+  width: 50px;
+  overflow-x: auto;
+  margin: auto;
+}
+div.memory1 {
+  width: 100px;
+  overflow-x: auto;
+  margin: auto;
+}
+div.memory2 {
+  width: 100px;
+  overflow-x: auto;
+  margin: auto;
+}
+div.memory3 {
+  width: 100px;
+  overflow-x: auto;
+  margin: auto;
+}
+div.memory4 {
+  width: 100px;
+  overflow-x: auto;
+  margin: auto;
+}
+div.memory5 {
+  width: 100px;
+  overflow-x: auto;
+  margin: auto;
+}
+div.countDll {
+  width: 50px;
+  overflow-x: auto;
+  margin: auto;
+}
+div.dllList {
+  width: 300px;
+  overflow-x: auto;
+  margin: auto;
+}

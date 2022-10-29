@@ -108,7 +108,7 @@ char* dynamicNav(int DLLCountHTML, int ProceessCountHTML, SIZE_T MemoryAvgHTML){
 		//error
 		return ;
 	}
-	sprintf(dataNav,"\n<div> Dll's cnt: %d </div>\n<div> Processes cnt: %d </div>\n<div> Memory avg: %d </div>\n", DLLCountHTML, ProceessCountHTML, MemoryAvgHTML);
+	sprintf(dataNav,"\n<div> Dll's cnt: %d </div>\n<div> Processes cnt: %d </div>\n<div> Memory avg: %llu </div>\n", DLLCountHTML, ProceessCountHTML, MemoryAvgHTML);
 
 	//Returns the line
 	LogEvent("The function (dynamicNav) is done and created dlls cnt, Processes cnt and Memory avg\n");
