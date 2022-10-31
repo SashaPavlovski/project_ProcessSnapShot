@@ -21,7 +21,7 @@ char* displaySnapShotInTable(snapshot* snapShot_html, char* NameProcessHtml, int
 		//errors
 		return;
 	}
-	sprintf(lineInTable, "<tr>\n<td> %d </td>\n<td><a href =\"%s\" >Sample%d</a></td>\n<td> %d </td>\n<td> %d </td>\n<td> %d </td>\n</tr>\n", snapShot_html->countSnapsNumber, NameProcessHtml, snapShot_html->countSnapsNumber, snapShot_html->countOfProcess, countDLLInSnapHTML, sizeOfMemoryHTML);
+	sprintf(lineInTable, "<tr>\n<td><div class=\"id\"> %d </div></td>\n<td><div class=\"link\"><a href = \"%s\" >Sample%d</a></div></td>\n<td><div class=\"cntProcess\"> %d </div></td>\n<td><div class=\"dllCnt\">12000 %d </div></td>\n<td><div class=\"memoryAvg\"> %d </div></td>\n</tr>\n", snapShot_html->countSnapsNumber, NameProcessHtml, snapShot_html->countSnapsNumber, snapShot_html->countOfProcess, countDLLInSnapHTML, sizeOfMemoryHTML);
 	
 	LogEventWithNumber("The function (displaySnapShotInTable) is done, sample", snapShot_html->countSnapsNumber);
 	Loglinebreak();
@@ -108,7 +108,7 @@ char* displayProcessesInTable(snapshot* snapShot_html) {
 			//creates a subtable of dlls for each process
 			optionOfDLL = displayDLLSInProcess(process);
 			lineInTable[0] = "";
-			sprintf(lineInTable, "<tr>\n<td> %s </td>\n<td> %lu  </td>\n<td> %lu  </td>\n<td> %llu <i class=\"fa fa-warning\" style=\"color:red\"> </i></td>\n<td> %llu </td>\n<td>  %llu </td>\n<td>  %llu  </td>\n<td> %d </td>\n<td><select>\n<option selected>dll's list</option>\n%s</select></td>\n</tr>", process->nameOfProcess, process->processId, process->PageFaultCount, process->WorkingSetSize, process->QuotaPagedPoolUsage, process->QuotaPeakPagedPoolUsage, process->PagefileUsage, process->numbersOfDLL, optionOfDLL);
+			sprintf(lineInTable, "\n<tr>\n<td><div class=\"processName\"> %s </div></td>\n<td><div class=\"processId\"> %lu</div> </td>\n<td><div class=\"memory1\"> %lu </div></td>\n<td><div class=\"memory2\"> %llu <i class=\"fa fa-warning\" style=\"color:red\"> </i></div></td>\n<td><div class=\"memory3\"> %llu </div></td>\n<td><div class=\"memory4\"> %llu </div></td>\n<td><div class=\"memory5\"> %llu </div></td>\n<td><div class=\"countDll\"> %d </div></td>\n<td><div class=\"dllList\"><select><option selected>dll's list</option>%s</select></td>\n</tr>\n", process->nameOfProcess, process->processId, process->PageFaultCount, process->WorkingSetSize, process->QuotaPagedPoolUsage, process->QuotaPeakPagedPoolUsage, process->PagefileUsage, process->numbersOfDLL, optionOfDLL);
 			LogEventWithVariable("The row process in the table that takes the most memory is", process->nameOfProcess);
 		}
 		else {
@@ -116,7 +116,7 @@ char* displayProcessesInTable(snapshot* snapShot_html) {
 			//creates a subtable of dlls for each process
 			optionOfDLL = displayDLLSInProcess(process);
 			lineInTable[0] = "";
-			sprintf(lineInTable, "<tr>\n<td> %s </td>\n<td> %lu </td>\n<td> %lu </td>\n<td> %llu </td>\n<td> %llu </td>\n<td> %llu </td>\n<td> %llu </td>\n<td> %d </td>\n<td><select>\n<option selected>dll's list</option>\n%s</select></td>\n</tr>", process->nameOfProcess, process->processId, process->PageFaultCount, process->WorkingSetSize, process->QuotaPagedPoolUsage, process->QuotaPeakPagedPoolUsage, process->PagefileUsage, process->numbersOfDLL, optionOfDLL);
+			sprintf(lineInTable,"\n<tr>\n<td><div class=\"processName\"> %s </div></td>\n<td><div class=\"processId\"> %lu</div> </td>\n<td><div class=\"memory1\"> %lu </div></td>\n<td><div class=\"memory2\"> %llu </div></td>\n<td><div class=\"memory3\"> %llu </div></td>\n<td><div class=\"memory4\"> %llu </div></td>\n<td><div class=\"memory5\"> %llu </div></td>\n<td><div class=\"countDll\"> %d </div></td>\n<td><div class=\"dllList\"><select><option selected>dll's list</option>%s</select></td>\n</tr>\n", process->nameOfProcess, process->processId, process->PageFaultCount, process->WorkingSetSize, process->QuotaPagedPoolUsage, process->QuotaPeakPagedPoolUsage, process->PagefileUsage, process->numbersOfDLL, optionOfDLL);
 		}
 			process = process->next;
 

@@ -28,7 +28,7 @@ void getMemoryInfo(DWORD processID){
 
 	//add the process Id into the new variable
 
-	variable = (char*)malloc(sizeof(processID));
+	variable = (char*)malloc(processID);
 	sprintf(variable, "%lu", processID);
 	LogEventWithVariable("add the process Id into the new variable", variable);
 	ret->processId = processID;
@@ -116,6 +116,15 @@ void getMemoryInfo(DWORD processID){
 		}
 		LogEvent("back to function (getMemoryInfo)");
 		LogEventWithNumber("done creating a linked list of all dll name for the process, The count of dll is", DLLName_Tail->countDLL);
+	}
+	else {
+		LogWarning("couldn't get the names dll");
+		DLLName_Tail->countDLL = 0;
+		DLLName_Tail == NULL;
+		//errorr
+		// couldn't get the name
+		// You better call GetLastError() here
+		// Write To log
 	}
 
 

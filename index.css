@@ -5,8 +5,12 @@
 }
 
 html {
-  font-family: "Poppins";
-  height: 100%;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAQElEQVQIW2P89OvDfwYo+PHjJ4zJwMHBzsAIk0SXAKkCS2KTAEu++vQSbizIKGQAl0SXAJkGlsQmAbcT2Shk+wH0sCzAEOZW1AAAAABJRU5ErkJggg==);
 }
 
 header {
@@ -36,17 +40,17 @@ span {
 }
 
 span > div {
-  border: solid green 3px;
-  padding: 3px;
+  border: dashed green 2px;
+  padding: 5px;
   padding-right: 20px;
+  font-family: "Kanit", sans-serif;
 }
 main {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  height: 100%;
-  background-color: blanchedalmond;
+  height: 100vh;
 }
 
 .leftTables {
@@ -55,38 +59,70 @@ main {
   justify-items: center;
   width: 50%;
 }
-.lefttableLink {
-  margin: 100px;
-  width: 50%;
-  height: 100px;
-  background-color: blueviolet;
+.table_1 {
+  margin: 20px auto;
+  width: 400px;
 }
 .rightTable {
   display: flex;
   flex-direction: column;
   width: 50%;
-  background-color: aqua;
 }
 table,
 th,
 td,
 tr {
-  border: solid black 3px;
+  border: 1px solid #b3bfaa;
   border-collapse: collapse;
 }
-table {
-  width: 100%;
-}
-/* td {
-  width: 60%;
-  height: 50px;
-  overflow: auto;
-  border: 70%;
-} */
 
-.table_2 {
-  margin: 100px;
+table {
+  margin: 20px auto;
+  width: 90%;
+  box-shadow: 1px 10px 15px rgb(143, 142, 142);
+}
+
+div.table_2 {
+  margin: 20px auto;
+  width: 600px;
+  border: dashed rgb(207, 207, 200) 2px;
+  border-radius: 10px;
+}
+div.dllName {
   width: 400px;
-  height: 100px;
-  background-color: blueviolet;
+  margin: auto;
+  overflow-x: auto;
+}
+
+div.link {
+  width: 100px;
+  margin: auto;
+}
+table th,
+table td {
+  padding: 10px;
+  text-align: center;
+}
+table.display th {
+  background: #d5e0cc;
+  color: rgb(0, 0, 0);
+}
+
+table.display td {
+  background: #fff;
+  font-size: 13px;
+}
+a {
+  color: #739931;
+  border-collapse: collapse;
+}
+
+h1 {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  font-family: "Kanit", sans-serif;
+  margin: 50px;
+  color: rgba(176, 105, 93, 1);
 }

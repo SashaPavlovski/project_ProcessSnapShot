@@ -1,0 +1,91 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+  font-family: "Kanit", sans-serif;
+  color: #d2fcfa;
+}
+
+body {
+  background: url(backgrounds_8.jpg);
+  background-size: 1300px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 400px;
+  height: 400px;
+  margin-left: 100px;
+}
+.top_1 {
+  margin-left: 10px;
+}
+h1 {
+  font-size: 50px;
+  line-height: 1.3em;
+}
+h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  line-height: 1em;
+}
+div.options {
+  font-size: 13px;
+  line-height: 1.3em;
+}
+mark {
+  background-color: #3367f0;
+  color: #d2fcfa;
+}
+/* buttom ********************************************************************* */
+
+.buttoms {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.buttoms_1 {
+  background-image: linear-gradient(to right, #006175 0%, #7ee2c1 100%);
+  border-radius: 40px;
+  box-sizing: border-box;
+  color: #7ee2c1;
+  display: block;
+  height: 50px;
+  font-size: 1.4em;
+  padding: 4px;
+  position: relative;
+  text-decoration: none;
+  width: 7em;
+  z-index: 2;
+}
+
+.buttoms_1:hover {
+  color: #fff;
+}
+
+.buttoms_1 .buttoms_1span {
+  align-items: center;
+  background: #0e0e10;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  transition: background 0.5s ease;
+  width: 100%;
+}
+
+.buttoms_1:hover .buttoms_1span {
+  background: transparent;
+}

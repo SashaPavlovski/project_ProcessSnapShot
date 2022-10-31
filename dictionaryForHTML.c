@@ -143,7 +143,7 @@ char* dynamicDLLTable(dictionaryDLL* D_DLLHeadHtml){
 	    	//error
 	    	return;
 	    }
-		sprintf(dataDLLTable, "\n<tr>\n<td> %s </td >\n<td ><a href = \"useDll_%d.html\" >dll%d.html</a></td>\n</tr>\n", currDictionaryDLL->nameOfDLL, countDLLPageHTML, countDLLPageHTML);
+		sprintf(dataDLLTable, "\n<tr>\n<td><div class=\"dllName\"> %s </div></td >\n<td><div class=\"link\"><a href = \"useDll_%d.html\">dll%d.html</a></div></td>\n</tr>\n", currDictionaryDLL->nameOfDLL, countDLLPageHTML, countDLLPageHTML);
 
 		currDictionaryDLL = currDictionaryDLL->next;
 
@@ -175,9 +175,9 @@ char* dinamicTitleProcessesUsed(dictionaryDLL* oneDictionaryDLL){
 		//error
 		return;
 	}
-	sprintf(titelProcesses, "<h1> %d process used </h1>", oneDictionaryDLL->dictionaryProcessTail->countDictionaryProcess);
+	sprintf(titelProcesses, "<h1 class=\"toptitle\"> %d process used </h1>", oneDictionaryDLL->dictionaryProcessTail->countDictionaryProcess);
 
-	LogEventWithNumber("The function (dinamicTitleProcessesUsed) is done and created single-valued dlls title , number of dll is", countDLLPageHTML);
+	LogEventWithNumber("The function (dinamicTitleProcessesUsed) is done and created single-valued dlls title , number of dll is", oneDictionaryDLL->dictionaryProcessTail->countDictionaryProcess);
 	Loglinebreak();
 
 	//Returns the title
@@ -212,7 +212,7 @@ char* dinamicTableProcessesUsed(dictionaryDLL* oneDictionaryDLL){
 	     	//error
 	     	return;
 	     }
-	     sprintf(tableProcesses, "\n<tr>\n<td> %d </td>\n<td> %s </td>\n</tr>\n", processesOfDDLL->countDictionaryProcess, processesOfDDLL->nameOfProcess);
+	     sprintf(tableProcesses, "\n<tr>\n<td> <div class=\"processId\"> %d </div></td>\n<td><div class=\"processName\"> %s </div></td>\n</tr>\n", processesOfDDLL->countDictionaryProcess, processesOfDDLL->nameOfProcess);
 		 processesOfDDLL = processesOfDDLL->next;
 
 		 //Connects each line that is created (tableProcesses) to one place (allTheOptions)
@@ -220,7 +220,7 @@ char* dinamicTableProcessesUsed(dictionaryDLL* oneDictionaryDLL){
 	}
 	free(tableProcesses);
 
-	LogEventWithNumber("The function (dinamicTableProcessesUsed) is done and created processes tables for each dictionary dll , number process is", processesOfDDLL->countDictionaryProcess);
+	LogEvent("The function (dinamicTableProcessesUsed) is done and created processes tables for each dictionary dll");
 	Loglinebreak();
 
 	//returns the entire created table
