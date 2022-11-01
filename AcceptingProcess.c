@@ -138,9 +138,7 @@ void getMemoryInfo(DWORD processID){
 
     //Close the process
 	CloseHandle(hProcess);
-	variable = (char*)malloc(sizeof(processID));
-	sprintf(variable, "%lu", processID);
-	LogEventWithVariable("the process is closed", variable);
+	LogEvent("the process is closed");
 
 	//get the new variable and links it to a process linked list
 	LogEvent("transfer the variable into the function (addProcess)");

@@ -52,7 +52,16 @@ main {
   width: 100%;
   height: 100vh;
 }
-
+@media screen and (max-width: 1132px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: cornflowerblue;
+  }
+}
 .leftTables {
   display: flex;
   flex-direction: column;
@@ -63,10 +72,28 @@ main {
   margin: 20px auto;
   width: 400px;
 }
+
 .rightTable {
   display: flex;
   flex-direction: column;
   width: 50%;
+}
+
+@media screen and (max-width: 1132px) {
+  .leftTables {
+    background-color: #739931;
+    justify-items: auto;
+    width: 400px;
+
+    height: 50%;
+  }
+
+  .rightTable {
+    background-color: darkmagenta;
+    justify-items: auto;
+    width: 400px;
+    height: 50%;
+  }
 }
 table,
 th,
@@ -88,6 +115,26 @@ div.table_2 {
   border: dashed rgb(207, 207, 200) 2px;
   border-radius: 10px;
 }
+
+@media screen and (max-width: 1132px) {
+  .table_1 {
+    margin: 20px auto;
+    width: 1000px;
+  }
+
+  table {
+    margin: 20px auto;
+    width: 90%;
+    box-shadow: 1px 10px 15px rgb(143, 142, 142);
+  }
+  div.table_2 {
+    margin: 20px auto;
+    width: 300px;
+    border: dashed rgb(207, 207, 200) 2px;
+    border-radius: 10px;
+  }
+}
+
 div.dllName {
   width: 400px;
   margin: auto;
@@ -98,10 +145,51 @@ div.link {
   width: 100px;
   margin: auto;
 }
+
+@media screen and (max-width: 1132px) {
+  div.cntProcess {
+    width: 20px;
+    margin: auto;
+    overflow-x: auto;
+  }
+  div.dllCnt {
+    width: 40px;
+    margin: auto;
+    overflow-x: auto;
+  }
+
+  div.memoryAvg {
+    width: 70px;
+    margin: auto;
+    overflow-x: auto;
+  }
+}
+
+@media screen and (max-width: 1132px) {
+  div.dllName {
+    width: 200px;
+    margin: auto;
+    overflow-x: auto;
+  }
+
+  div.link {
+    width: 50px;
+    margin: auto;
+  }
+}
 table th,
 table td {
   padding: 10px;
   text-align: center;
+}
+
+@media screen and (max-width: 1132px) {
+  table th,
+  table td {
+    padding: 3px;
+    text-align: center;
+    font-size: 11px;
+  }
 }
 table.display th {
   background: #d5e0cc;
@@ -112,6 +200,7 @@ table.display td {
   background: #fff;
   font-size: 13px;
 }
+
 a {
   color: #739931;
   border-collapse: collapse;
@@ -125,4 +214,9 @@ h1 {
   font-family: "Kanit", sans-serif;
   margin: 50px;
   color: rgba(176, 105, 93, 1);
+}
+@media screen and (max-width: 1132px) {
+  h1 {
+    margin: 10px;
+  }
 }
