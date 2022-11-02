@@ -15,10 +15,10 @@ char* displaySnapShotInTable(snapshot* snapShot_html, char* NameProcessHtml, int
 	Loglinebreak();
 	LogEvent("enter the function (displaySnapShotInTable)");
 	char* lineInTable = (char*)malloc(sizeof(int) * 100);
-	//lineInTable[0] = NULL;
 	if (!lineInTable)
 	{
 		//errors
+		LogError(strerror(GetLastError()));
 		return;
 	}
 	sprintf(lineInTable, "<tr>\n<td><div class=\"id\"> %d </div></td>\n<td><div class=\"link\"><a href = \"%s\" >Sample%d</a></div></td>\n<td><div class=\"cntProcess\"> %d </div></td>\n<td><div class=\"dllCnt\">12000 %d </div></td>\n<td><div class=\"memoryAvg\"> %d </div></td>\n</tr>\n", snapShot_html->countSnapsNumber, NameProcessHtml, snapShot_html->countSnapsNumber, snapShot_html->countOfProcess, countDLLInSnapHTML, sizeOfMemoryHTML);
@@ -43,12 +43,14 @@ char* displayDLLSInProcess(PROCESS* htmlProcess) {
 	if (!lineInTable)
 	{
 		//error
+		LogError(strerror(GetLastError()));
 		return;
 	}
 	char* allTheOptions = (char*)malloc(sizeof(DLLName) * htmlProcess->numbersOfDLL + 10000);
 	if (!allTheOptions)
 	{
 		//error
+		LogError(strerror(GetLastError()));
 		return;
 	}
 	allTheOptions[0] = NULL;
@@ -91,12 +93,14 @@ char* displayProcessesInTable(snapshot* snapShot_html) {
 	if (!lineInTable){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 	char* allTheProcesses = (char*)malloc(sizeof(PROCESS) * snapShot_html->countOfProcess + 10000000);
 	if (!allTheProcesses){
 
 		//error
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 	allTheProcesses[0] = NULL;
@@ -152,6 +156,7 @@ char* displayProcessesInTitle(snapshot* snapShot_html) {
 	if (!lineInTable)
 	{
 		//error
+		LogError(strerror(GetLastError()));
 		return;
 	}
 	sprintf(lineInTable, "<h1> Samples List Number : %d At %s </h1>", snapShot_html->countSnapsNumber, snapShot_html->timeOfSnapshot);

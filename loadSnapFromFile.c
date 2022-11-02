@@ -22,7 +22,7 @@ void loadSnapFromFile(){
 	FILE* f = fopen(fileName, "rb");
 	if (!f){
 	
-		printf("The file did not open");
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 	//sign to the add functions that this is loadFormFile.
@@ -33,6 +33,7 @@ void loadSnapFromFile(){
 	if (!loadSnapShotHeaderFile){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 	processHeader* loadProcessHeaderFile;
@@ -40,6 +41,7 @@ void loadSnapFromFile(){
 	if (!loadProcessHeaderFile){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 	DLLNameHeaders* loadDLLHeaderFile;
@@ -47,6 +49,7 @@ void loadSnapFromFile(){
 	if (!loadDLLHeaderFile){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 
@@ -58,6 +61,7 @@ void loadSnapFromFile(){
 	if (!read){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 
@@ -65,6 +69,7 @@ void loadSnapFromFile(){
 	if (!read){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 
@@ -72,6 +77,7 @@ void loadSnapFromFile(){
 	if (!read){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 
@@ -82,6 +88,7 @@ void loadSnapFromFile(){
 	if (!currentSnapShot){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 
@@ -89,6 +96,7 @@ void loadSnapFromFile(){
 	if (!currentProcess){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 
@@ -96,6 +104,7 @@ void loadSnapFromFile(){
 	if (!currentDLL){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 
@@ -105,6 +114,7 @@ void loadSnapFromFile(){
 		if (!read){
 		
 			//error
+			LogError(strerror(GetLastError()));
 			return 1;
 		}
 
@@ -118,6 +128,7 @@ void loadSnapFromFile(){
 			if (!read){
 			
 				//error
+				LogError(strerror(GetLastError()));
 				return 1;
 			}
 
@@ -131,6 +142,7 @@ void loadSnapFromFile(){
 				if (!read){
 				
 					//error
+					LogError(strerror(GetLastError()));
 					return 1;
 				}
 				addDLL(currentDLL->nameOfDLL);

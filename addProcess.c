@@ -67,7 +67,7 @@ void addProcess(PROCESS* processNew){
 	//creates a new place in memory
 	newProcess = (PROCESS*)malloc(sizeof(PROCESS));
 	if (!newProcess){
-	
+		LogError(strerror(GetLastError()));
 		//error - No memory allocation
 		exit(1);
 	}
@@ -111,10 +111,10 @@ void addProcess(PROCESS* processNew){
 		PROCESS_Tail = newProcess;
 	}
 
+	//free(processNew);
 	// creates a header struct for processes
 	if (countP == 1)
     headerProcessDetails();
-
 	LogEventWithNumber("The function (addProcess) is done and the process is linked, number\n", countOfDll);
 }
 
@@ -124,6 +124,5 @@ void headerProcessDetails(){
 	Loglinebreak();
 	LogEvent("enter the function (headerProcessDetails)");
 	processHeaderFile->versionProcess = versionOfProcess;
-	processHeaderFile->reserve[20] = NULL;
 	LogEvent("The function (headerProcessDetails) is done and save the header of dll link list\n");
 }

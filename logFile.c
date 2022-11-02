@@ -9,12 +9,12 @@
 
 char logFileName[200] = "";
 
-void fun_log(char* message)
+void fun_log(char message [13000])
 {
 	FILE* f = fopen(logFileName, "a");
 	if (!f)
 	{
-		printf("error - The log file is not opened\n");
+		LogError(strerror(GetLastError()));
 		exit(1);
 	}
 
@@ -22,7 +22,7 @@ void fun_log(char* message)
 	time(&t);
 	struct tm* timeinfo;
 	timeinfo = localtime(&t);
-	char str_message_with_time[10300];
+	char str_message_with_time[13100];
 	sprintf(str_message_with_time, "%d.%d.%d:%d:%d:%d - %s\n", timeinfo->tm_year + 1900, timeinfo->tm_mon + 1, timeinfo->tm_mday, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec, message);
 
 

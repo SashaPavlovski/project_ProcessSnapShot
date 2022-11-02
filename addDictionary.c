@@ -25,8 +25,7 @@ void MakeProcessDictionary(PROCESS* useProcessInDLL){
 	usedDictionaryProcess = (S_dictionaryProcess*)malloc(sizeof(S_dictionaryProcess));
 	if (usedDictionaryProcess == NULL)
 	{
-		//char* str = strerror(GetLastError());
-		//LogError(str);
+       LogError(strerror(GetLastError()));
 
 		return;
 	}

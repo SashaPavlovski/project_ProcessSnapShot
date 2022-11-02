@@ -96,3 +96,20 @@ div.processName {
   width: 800px;
   margin: auto;
 }
+@media screen and (max-width: 1132px) {
+  div.buttomtable {
+    margin: 80px 20px 20px 20px;
+    width: 400px;
+  }
+
+  div.processId {
+    width: 70px;
+    margin: auto;
+    overflow-x: auto;
+  }
+  div.processName {
+    width: 330px;
+    margin: auto;
+    overflow-x: auto;
+  }
+}

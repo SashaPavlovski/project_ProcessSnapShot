@@ -6,59 +6,7 @@
 #pragma warning(disable:4996)
 
 
-void PrintList()
-{
-	//LogEvent("Print program started\n");
-	PROCESS* move = PROCESS_Head;
-	PROCESS* print = PROCESS_Head;
 
-	while (move != NULL)
-	{
-		print = move;
-		move = move->next;
-		printf("the number is %d\n", print->numbersOfDLL);
-		//LogEvent("A document has been printed\n");
-
-	}
-	//LogEvent("The printing process is finished and the program PrintList is closed\n\n");
-	printf("\n\n\n");
-}
-
-void PrintCount()
-{
-	PROCESS* move = PROCESS_Head;
-	PROCESS* print = PROCESS_Head;
-
-	while (move != NULL)
-	{
-		print = move;
-		move = move->next;
-		printf("the countProcess is %d\n", print->countProcess);
-		//LogEvent("A document has been printed\n");
-
-	}
-	printf("the tail is %d\n", PROCESS_Tail->countProcess);
-	//LogEvent("The printing process is finished and the program PrintList is closed\n\n");
-}
-
-
-void PrintListDictionary()
-{
-	//LogEvent("Print program started\n");
-	dictionaryDLL* move = dictionaryDLL_Head;
-	dictionaryDLL* print = dictionaryDLL_Head;
-
-	while (move != NULL)
-	{
-		print = move;
-		move = move->next;
-		printf("the number is %s\n", print->nameOfDLL);
-		//LogEvent("A document has been printed\n");
-
-	}
-	//LogEvent("The printing process is finished and the program PrintList is closed\n\n");
-	printf("\n\n\n");
-}
 
 void replaceBetweenTwoProcess(PROCESS* processToChange){
 
@@ -70,11 +18,13 @@ void replaceBetweenTwoProcess(PROCESS* processToChange){
 	if (changeProcess == NULL){
 	
     	LogEvent("No need to swap. No process in list\n");
+		return;
 		//There are no numbers
 	}
 	else if (changeProcess->next == NULL){
 	
 		LogEventWithNumber("No need to swap. This is the only number", changeProcess->countProcess);
+		return;
 		//single
 	}
 	else if (changeProcess == PROCESS_Head && changeProcess->next == PROCESS_Tail){
@@ -150,7 +100,8 @@ void SortingBetweenTwoProcessCountDLL(){
 	PROCESS* curreProcess = PROCESS_Head;
 	if (!curreProcess){
 	
-		//LogError("The list is empty\n");
+		LogError(strerror(GetLastError()));
+
 		// The list is empty
 		return;
 	}
@@ -176,7 +127,6 @@ void SortingBetweenTwoProcessCountDLL(){
 		curreProcess = PROCESS_Head;
 	}
 
-	PrintList();
 
 	LogEvent("The sorting process has Ended and the fumction (SortingBetweenTwoProcessCountDLL) is done\n\n");
 }

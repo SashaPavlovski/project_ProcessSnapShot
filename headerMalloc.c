@@ -31,6 +31,7 @@ void headerMalloc(){
 	if (!snapShotHeaderFile)
 	{
 		//error
+		LogError(strerror(GetLastError()));
 		return;
 	}
 
@@ -38,6 +39,7 @@ void headerMalloc(){
 	if (!processHeaderFile)
 	{
 		//error
+		LogError(strerror(GetLastError()));
 		return;
 	}
 
@@ -46,6 +48,7 @@ void headerMalloc(){
 	if (!DLLHeaderFile)
 	{
 		//error
+		LogError(strerror(GetLastError()));
 		return;
 	}
 

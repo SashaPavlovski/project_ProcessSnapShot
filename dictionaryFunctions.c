@@ -149,7 +149,8 @@ void addDictionaryDLL(DLLName* nameSortDLL, PROCESS* processSortDLL) {
 	if (!newDictionaryDLL)
 	{
 		//error
-		return ;
+		LogError(strerror(GetLastError()));
+		return;
 	}
 
 	//count the dictionary dll, every time a new dictionary dll enter to function it is increases by one

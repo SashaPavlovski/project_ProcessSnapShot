@@ -16,13 +16,12 @@ int countOfDll = 0;
 
 //adds a dll to the linked list
 //gets a dll name
-void addDLL(char dllName[]){
+void addDLL(char dllName[200]){
 	// The function has started
 	LogEvent("enter the function (addDLL)");
 
 	
-	//count the dll, every time a new dll enter to function it is increases by one
-	++countOfDll;
+
 
 	//if the function (addDLL) gets NULL it will reset the DLLName_Head 
 	if (dllName == NULL){
@@ -33,12 +32,15 @@ void addDLL(char dllName[]){
 		LogEvent("The function (addDLL) is done\n");
 		return;
 	}
+	//count the dll, every time a new dll enter to function it is increases by one
+	++countOfDll;
 
 	//creates a new place in memory
 	DLLName* newDLL = (DLLName*)malloc(sizeof(DLLName));
 	if (!newDLL){
 	
 		//error - No memory allocation
+		LogError(strerror(GetLastError()));
 		exit(1);
 	}
 
@@ -122,7 +124,5 @@ void headerDLLDetails(){
 	//Updates the version of the dll struct 
 	DLLHeaderFile->versionDLLName= versionOfDLL;
 
-	//Saves space for changes in dll struct
-	DLLHeaderFile->reserve[20] = NULL;
 	LogEvent("The function (headerDLLDetails) is done and save the header of dll link list\n");
 }

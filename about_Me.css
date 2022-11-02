@@ -24,14 +24,27 @@ header > nav {
 a {
   color: #f2f539;
 }
-
-main {
-  display: grid;
+@media screen and (max-width: 1132px) {
+  body {
+    background-size: 1000px;
+  }
+  a {
+    color: #f0f0e5;
+  }
 }
 .myPicture {
   width: 250px;
 }
-
+@media screen and (max-width: 1132px) {
+  .myPicture {
+    width: 100px;
+    margin-left: 10px;
+  }
+  .video {
+    width: 170px;
+    height: 150px;
+  }
+}
 .me {
   display: flex;
   flex-direction: row;
@@ -41,21 +54,38 @@ main {
   margin-bottom: 10px;
   gap: 100px;
 }
+@media screen and (max-width: 1132px) {
+  .me {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    gap: 50px;
+  }
+}
 .myData {
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
+@media screen and (max-width: 1132px) {
+  .myData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 40px;
+    margin-top: 10px;
+  }
+}
 body {
   display: flex;
   flex-direction: column;
 }
-.txt_1 {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  margin-left: 140px;
-}
+
 .bi {
   width: 100px;
 }
@@ -69,10 +99,39 @@ div {
   color: #0c1f0e;
   font-family: Arial, Helvetica, sans-serif;
 }
+@media screen and (max-width: 1132px) {
+  h1 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    text-align: center;
+  }
+  .information {
+    width: 200px;
+  }
+  div {
+    font-size: 13px;
+    margin: 3px;
+  }
+}
 mark {
   background-color: #e5e985;
 }
-
+.txt_1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin-left: 140px;
+}
+@media screen and (max-width: 1132px) {
+  .txt_1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 15px;
+    margin-bottom: 0px;
+  }
+}
 .fa {
   padding: 13px;
   font-size: 30px;
@@ -80,7 +139,15 @@ mark {
   text-decoration: none;
   border-radius: 100%;
 }
-
+@media screen and (max-width: 1132px) {
+  .fa {
+    padding: 8px;
+    font-size: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 100%;
+  }
+}
 .fa:hover {
   opacity: 0.7;
 }
@@ -103,4 +170,11 @@ li {
   list-style: none;
   padding: 5px;
   font-size: 15px;
+}
+@media screen and (max-width: 1132px) {
+  li {
+    list-style: none;
+    padding: 3px;
+    font-size: 15px;
+  }
 }

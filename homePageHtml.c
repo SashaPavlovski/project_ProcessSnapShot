@@ -28,7 +28,7 @@ char* dynamicHtml(char* nameOfFile, char* addString, char* topHtml){
 	firstTimeInFile = 1;
 	char* found = "";
 	int len;
-	char* newFileSpace;
+	char* newFileSpace = "";
 
 	//dont have a title
 	if (topHtml == NULL){
@@ -61,11 +61,9 @@ char* dynamicHtml(char* nameOfFile, char* addString, char* topHtml){
 		LogEvent("enter to condition that have a title");
 		//saves the top part of the source file.
 		found = strstr(htmlFileTemplate, SEPERATOR);
-		newFileSpace = (char*)malloc(strlen(found) + strlen(topHtml) + 2 + strlen(dynamicTable));
-		//newFileSpace = "";
+		newFileSpace = (char*)malloc(strlen(found) + strlen(topHtml) + 1 + strlen(dynamicTable));
 		LogEvent("saving the top part in a variable");
 		strcpy(newFileSpace, topHtml);
-		//free(topHtml);
 	}
 	// adding dynamic part.
 	strcat(newFileSpace, dynamicTable);
@@ -75,7 +73,7 @@ char* dynamicHtml(char* nameOfFile, char* addString, char* topHtml){
 	char* nameForFile = saveInToFileHTML(newFileSpace);
 	LogEvent("back to function (dynamicHtml)");
 	free(htmlFileTemplate);
-	//free(dynamicTable);
+	
 	LogEventWithVariable("The function (dynamicHtml) is done and created html pages, name", nameForFile);
 	Loglinebreak();
 
@@ -110,6 +108,7 @@ char* dynamicTitleHtml(char* nameOfFile, char* addString, char* title) {
 	if (!newFileSpace){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return;
 	}
 
@@ -141,9 +140,9 @@ char* dynamicTitleHtml(char* nameOfFile, char* addString, char* title) {
 //add the name of origin file and the nav data.
 char* dynamicNavHtml(char* nameOfFile, char* addString) {
 
-	Loglinebreak();
-	LogEvent("enter the function (dynamicNavHtml)");
-
+	 Loglinebreak();
+	 LogEvent("enter the function (dynamicNavHtml)");
+     nameFile[50] = "";
      strcpy(nameFile, nameOfFile);
      char* dynamicTitle = addString;
 
@@ -154,10 +153,11 @@ char* dynamicNavHtml(char* nameOfFile, char* addString) {
      
      
      int len = found - htmlFileTemplate;
-     char* newFileSpace = (char*)malloc(strlen(htmlFileTemplate) + 1 + strlen(dynamicTitle));
+     char* newFileSpace = (char*)malloc(strlen(htmlFileTemplate) + 2 + strlen(dynamicTitle));
      if (!newFileSpace){
      
      	//error
+		 LogError(strerror(GetLastError()));
      	return;
      }
      
@@ -170,9 +170,9 @@ char* dynamicNavHtml(char* nameOfFile, char* addString) {
      
      //free(dynamicTitle);
      free(htmlFileTemplate);
-
-	 LogEventWithVariable("The function (dynamicNavHtml) is done and created html nave in home page, name", nameForFile);
-	 Loglinebreak();
+	 
+	// LogEvent("The function (dynamicNavHtml) is done and created html nave in home page");
+	 //Loglinebreak();
 
      return nameForFile;
 }

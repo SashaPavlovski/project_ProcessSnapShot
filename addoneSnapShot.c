@@ -36,6 +36,7 @@ void addOneSnapShot(snapshot* newSnapShotFromFile){
 	if (!newSnapShot)
 	{
 		//error - No memory allocation
+		LogError(strerror(GetLastError()));
 		exit(1);
 	}
 
@@ -118,8 +119,6 @@ void headerSnapShotDetails(){
 	//saves the amount of the snapshots
 	snapShotHeaderFile->countSnapshot = snapshot_Tail->countSnapsNumber;
 
-	//Saves space for changes in snapshot struct
-	snapShotHeaderFile->reserve[20] = NULL;
 	
 	LogEvent("The function (headerSnapShotDetails) is done\n");
 }
@@ -149,7 +148,6 @@ void creatingHtml() {
 	char* linkToSample = dynamicTitleHtml("index2.html", temporaryHTML, temporaryTitle);
 	LogEvent("back to function (creatingHtml)");
 
-	//free(temporaryTitle);
 	free(temporaryHTML);
 
 	firstTimeInFile = 0;
@@ -162,9 +160,7 @@ void creatingHtml() {
 	//creates the first part of a home page
 	//the table of samples
 	//add file name of page we want to open and the dinamic sample table.
-	char* nameF = dynamicHtml("index.html", dynamicLineHtml, NULL);
+	dynamicHtml("index.html", dynamicLineHtml, NULL);
 	free(linkToSample);
-	//free(nameF);
-	//free(dynamicLineHtml);
 	LogEvent("The function (creatingHtml) is done and created a sample page on the home page\n");
 }

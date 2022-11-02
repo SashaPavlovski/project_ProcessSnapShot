@@ -28,9 +28,13 @@ void getMemoryInfo(DWORD processID){
 
 	//add the process Id into the new variable
 
-	variable = (char*)malloc(processID);
-	sprintf(variable, "%lu", processID);
-	LogEventWithVariable("add the process Id into the new variable", variable);
+	//variable = (char*)malloc(processID);
+	//if (!variable) {
+	//	LogError(strerror(GetLastError()));
+	//	exit(1);
+	//}
+	//sprintf(variable, "%lu", processID);
+	LogEvent("add the process Id into the new variable");
 	ret->processId = processID;
 
 	
@@ -72,9 +76,6 @@ void getMemoryInfo(DWORD processID){
 	}
 	else{
 		LogWarning("couldn't get the name process, its did not enter a linked list");
-		// couldn't get the name
-		// You better call GetLastError() here
-		// Write To log
 		return 1;
 	}
 
@@ -116,25 +117,29 @@ void getMemoryInfo(DWORD processID){
 		}
 		LogEvent("back to function (getMemoryInfo)");
 		LogEventWithNumber("done creating a linked list of all dll name for the process, The count of dll is", DLLName_Tail->countDLL);
+		
+		LogEvent("add the dllTail into the new variable");
+		//add the DLLName_Tail, DLLName_Head, countDLL into the new variable
+		ret->dllTail = DLLName_Tail;
+		LogEvent("add the dllHead into the new variable");
+		ret->dll = DLLName_Head;
+		LogEvent("add the numbersOfDLL into the new variable");
+		ret->numbersOfDLL = DLLName_Tail->countDLL;
+
 	}
 	else {
 		LogWarning("couldn't get the names dll");
-		DLLName_Tail->countDLL = 0;
-		DLLName_Tail == NULL;
-		//errorr
-		// couldn't get the name
-		// You better call GetLastError() here
-		// Write To log
+		DLLName_Tail = NULL;
+		LogEvent("add the dllTail into the new variable");
+		//add the DLLName_Tail, DLLName_Head, countDLL into the new variable
+		ret->dllTail = NULL;
+		LogEvent("add the dllHead into the new variable");
+		ret->dll = NULL;
+		LogEvent("add the numbersOfDLL into the new variable");
+		ret->numbersOfDLL = 0;
 	}
 
 
-	LogEvent("add the dllTail into the new variable");
-	//add the DLLName_Tail, DLLName_Head, countDLL into the new variable
-	ret->dllTail = DLLName_Tail;
-	LogEvent("add the dllHead into the new variable");
-	ret->dll = DLLName_Head;
-	LogEvent("add the numbersOfDLL into the new variable");
-	ret->numbersOfDLL = DLLName_Tail->countDLL;
 
     //Close the process
 	CloseHandle(hProcess);
@@ -163,6 +168,7 @@ void getProcessesInfo(){
 	LogEvent("Loads all processes to the array\n");
 	if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded)){
 		// Error. Write to log
+		LogError(strerror(GetLastError()));
 		LogError("The function failed to exit the processes");
 		return 1;
 	}
@@ -179,7 +185,7 @@ void getProcessesInfo(){
 		// Loop of all processes
 		for (int y = 0; y < cProcesses; y++){
 		
-			//function that makes a frocess linked list
+			//function that makes a process linked list
 			getMemoryInfo(aProcesses[y]);
 
 		}
@@ -211,6 +217,8 @@ void getProcessesInfo(){
 			if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded)){
 			
 				// Error. Write to log
+				LogError(strerror(GetLastError()));
+				LogError("The function failed to exit the processes");
 				return 1;
 			}
 

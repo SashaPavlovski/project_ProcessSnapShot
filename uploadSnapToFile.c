@@ -21,7 +21,7 @@ void uploadSnapToFile() {
 	if (snapShotHeaderFile->versionSnapShot == NULL )
 	{
 		//the snapShotHeaderFile not exists
-		printf("There are no  existing Snapshots");
+		LogEvent("There are no  existing Snapshots");
 		return;
 	}
 	printf("enter name for file\n");
@@ -29,7 +29,8 @@ void uploadSnapToFile() {
 	FILE* f = fopen(fileName, "wb");
 	if (!f)
 	{
-		printf("The file did not open");
+		LogError(strerror(GetLastError()));
+
 		exit(1);
 	}
 
@@ -39,12 +40,16 @@ void uploadSnapToFile() {
 	if (!write)
 	{
 		//error
+		LogError(strerror(GetLastError()));
+
 		return;
 	}
 	write = fwrite(processHeaderFile, sizeof(processHeader), 1, f);
 	if (!write)
 	{
 		//error
+		LogError(strerror(GetLastError()));
+
 		return;
 	}
 	
@@ -52,6 +57,8 @@ void uploadSnapToFile() {
 	if (!write)
 	{
 			//error
+		LogError(strerror(GetLastError()));
+
 		return;
 	}
 
@@ -68,6 +75,8 @@ void uploadSnapToFile() {
 		 if (!write)
 		 {
 			 //error
+			 LogError(strerror(GetLastError()));
+
 			 return;
 		 }
 		 LogEventWithNumber("Read snapShot", currentSnapShot->countSnapsNumber);
@@ -80,6 +89,8 @@ void uploadSnapToFile() {
 			 if (!write)
 			 {
 				 //error
+				 LogError(strerror(GetLastError()));
+
 				 return;
 			 }
 			 LogEventWithNumber("load process", currentProcess->countProcess);
@@ -92,6 +103,8 @@ void uploadSnapToFile() {
 				 if (!write)
 				 {
 					 //error
+					 LogError(strerror(GetLastError()));
+
 					 return;
 				 }
 				 LogEventWithNumber("load dll", currentDLL->countDLL);

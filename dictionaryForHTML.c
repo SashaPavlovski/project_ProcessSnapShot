@@ -18,7 +18,7 @@ extern PROCESS* sortListProcess = NULL;
 //Builds the home page
 //Builds the dll pages
 void HtmlPage(){
-
+	
 	Loglinebreak();
 	LogEvent("enter the function (HtmlPage)");
 
@@ -37,6 +37,7 @@ void HtmlPage(){
 	//add a first snapshot
 	dictionaryProcess(snapshot_Head);
 	LogEvent("back to function (HtmlPage)");
+
 
 	//Saving in a variable the new process linked list
 	sortListProcess = PROCESS_Head;
@@ -65,6 +66,7 @@ void HtmlPage(){
 	firstTimeInFile = 1;
 	//Save the nav data on the home page
 	dynamicNavHtml("index.html",dataNav);
+	free(dataNav);
 	LogEvent("back to function (HtmlPage)");
 
 	dictionaryDLL* currDD = dictionaryDLL_Head;
@@ -101,11 +103,11 @@ char* dynamicNav(int DLLCountHTML, int ProceessCountHTML, SIZE_T MemoryAvgHTML){
 	Loglinebreak();
 	LogEvent("enter the function (dynamicNav)");
 
-	char* dataNav = (char*)malloc(sizeof(long));
-	dataNav[0] = NULL;
+	char* dataNav = (char*)malloc((sizeof(int) * 2) + sizeof(SIZE_T) + 10000);
 	if (!dataNav){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return ;
 	}
 	sprintf(dataNav,"\n<div> Dll's cnt: %d </div>\n<div> Processes cnt: %d </div>\n<div> Memory avg: %llu </div>\n", DLLCountHTML, ProceessCountHTML, MemoryAvgHTML);
@@ -130,6 +132,7 @@ char* dynamicDLLTable(dictionaryDLL* D_DLLHeadHtml){
 	if (!allTheOptions){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return;
 	}
 	allTheOptions[0] = NULL;
@@ -141,6 +144,7 @@ char* dynamicDLLTable(dictionaryDLL* D_DLLHeadHtml){
 	    if (!dataDLLTable){
 	    
 	    	//error
+			LogError(strerror(GetLastError()));
 	    	return;
 	    }
 		sprintf(dataDLLTable, "\n<tr>\n<td><div class=\"dllName\"> %s </div></td >\n<td><div class=\"link\"><a href = \"useDll_%d.html\">dll%d.html</a></div></td>\n</tr>\n", currDictionaryDLL->nameOfDLL, countDLLPageHTML, countDLLPageHTML);
@@ -173,6 +177,7 @@ char* dinamicTitleProcessesUsed(dictionaryDLL* oneDictionaryDLL){
 	if (!titelProcesses){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return;
 	}
 	sprintf(titelProcesses, "<h1 class=\"toptitle\"> %d process used </h1>", oneDictionaryDLL->dictionaryProcessTail->countDictionaryProcess);
@@ -202,6 +207,7 @@ char* dinamicTableProcessesUsed(dictionaryDLL* oneDictionaryDLL){
 	if (!allTheOptions){
 	
 		//error
+		LogError(strerror(GetLastError()));
 		return;
 	}
 	while (processesOfDDLL != NULL){
@@ -210,6 +216,7 @@ char* dinamicTableProcessesUsed(dictionaryDLL* oneDictionaryDLL){
 	     if (!tableProcesses){
 	     
 	     	//error
+			 LogError(strerror(GetLastError()));
 	     	return;
 	     }
 	     sprintf(tableProcesses, "\n<tr>\n<td> <div class=\"processId\"> %d </div></td>\n<td><div class=\"processName\"> %s </div></td>\n</tr>\n", processesOfDDLL->countDictionaryProcess, processesOfDDLL->nameOfProcess);

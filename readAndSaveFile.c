@@ -3,11 +3,11 @@
 #include <string.h>
 #include "homePageHTML.h"
 #include "logFile.h"
+
 #pragma warning(disable:4996)
 
 
-FILE* file;
-FILE* fileR;
+
 int countOfCreateFileIndex2 = 1;
 int countOfCreateFileIndex3 = 1;
 
@@ -17,7 +17,8 @@ char* newNameOfFile = 0;
 
 //reads from the file
 char* readFromFile() {
-	
+
+	FILE* fileR = NULL;
 	Loglinebreak();
 	LogEvent("enter the function (readFromFile)");
 
@@ -29,6 +30,7 @@ char* readFromFile() {
 		fileR = fopen(nameFile, "r");
 		if (!fileR){
 			//error
+		    LogError(strerror(GetLastError()));
 			return 1;
 		}
 
@@ -40,6 +42,7 @@ char* readFromFile() {
 		fileR = fopen(nameFile, "r");
 		if (!fileR){
 			//error
+			LogError(strerror(GetLastError()));
 			return 1;
 		}
 	}
@@ -50,6 +53,7 @@ char* readFromFile() {
 		fileR = fopen("homePage.html", "r");
 		if (!fileR){
 			//error
+			LogError(strerror(GetLastError()));
 			return 1;
 		}
 	}
@@ -60,6 +64,7 @@ char* readFromFile() {
 		fileR = fopen(newNameOfFile, "r");
 		if (!fileR){
 			//error
+			LogError(strerror(GetLastError()));
 			return 1;
 		}
 	}
@@ -70,6 +75,7 @@ char* readFromFile() {
 		fileR = fopen(newNameOfFile, "r");
 		if (!fileR){
 			//error
+			LogError(strerror(GetLastError()));
 			return 1;
 		}
 	}
@@ -80,18 +86,19 @@ char* readFromFile() {
     char* charCount = (char*)malloc(10000);
 	if (!charCount){
 		//error
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
-    char* read;
+	char* read = "";
     int fileSize = 0;
-    while ((read = fgets(charCount, 1000, fileR))){
+    while ((read = fgets(charCount, 10000, fileR))){
 
 	    fileSize += strlen(charCount);
     }
     
     free(charCount);
     fclose(fileR);
-    fileSize += 2;
+    fileSize += 1;
 	LogEvent("The file is closed and the memory is freed");
 
 
@@ -100,18 +107,19 @@ char* readFromFile() {
     // alloc space as file size
 	char* inThefile = (char*)malloc(fileSize);
 	if (!inThefile){
-
+		LogError(strerror(GetLastError()));
 		return 1;
 	}
 
-
+	FILE* fileRe = NULL;
 
 	//open the file to read the file into a variable
 	if (firstTimeInFile == 0 && strcmp(nameFile, "index.html") != 0){
 		LogEvent("second enter if it's not the home page and it's the first time condition");
-		fileR = fopen(nameFile, "r");
-		if (!fileR){
+		fileRe = fopen(nameFile, "r");
+		if (!fileRe){
 			//error
+			LogError(strerror(GetLastError()));
 			return 1;
 		}
 
@@ -121,10 +129,11 @@ char* readFromFile() {
 		LogEvent("second enter if it's the home page and it's the first time condition");
 
 		firstTimeHomePage = 1;
-		fileR = fopen(nameFile, "r");
-		if (!fileR){
+		fileRe = fopen(nameFile, "r");
+		if (!fileRe){
 		
 			//error
+			LogError(strerror(GetLastError()));
 			return 1;
 		}
 	}
@@ -132,10 +141,11 @@ char* readFromFile() {
 	
 		LogEvent("second enter if it's index.html and it's not the first time condition");
 
-		fileR = fopen("homePage.html", "r");
-		if (!fileR) {
+		fileRe = fopen("homePage.html", "r");
+		if (!fileRe) {
 		
 			//error
+			LogError(strerror(GetLastError()));
 			return 1;
 		}
 	}
@@ -143,10 +153,11 @@ char* readFromFile() {
 	
 		LogEvent("second enter if it's index2.html and it's not the first time condition");
 
-		fileR = fopen(newNameOfFile, "r");
-		if (!fileR) {
+		fileRe = fopen(newNameOfFile, "r");
+		if (!fileRe) {
 		
 			//error
+			LogError(strerror(GetLastError()));
 			return 1;
 		}
 	}
@@ -154,17 +165,18 @@ char* readFromFile() {
 	
 		LogEvent("second enter if it's index3.html and it's not the first time condition");
 
-		fileR = fopen(newNameOfFile, "r");
-		if (!fileR) {
+		fileRe = fopen(newNameOfFile, "r");
+		if (!fileRe) {
 		
 			//error
+			LogError(strerror(GetLastError()));
 			return 1;
 		}
 	}
 
     int readPosition = 0;
     char charToRead;
-    while ((charToRead = fgetc(fileR)) != EOF) {
+    while ((charToRead = fgetc(fileRe)) != EOF) {
     
 		inThefile[readPosition] = charToRead;
     	readPosition++;
@@ -172,7 +184,7 @@ char* readFromFile() {
 	inThefile[readPosition] = NULL;
 	
     
-    fclose(fileR);
+    fclose(fileRe);
 
 	LogEvent("The file is closed and the value send, the function (readFromFile) is done\n");
 	//returns the variable
@@ -185,7 +197,7 @@ char* readFromFile() {
 //saves what is created in a file
 //Gets the variable
 char* saveInToFileHTML(char* newFile) {
-
+	FILE* file;
 	Loglinebreak();
 	LogEvent("enter the function (saveInToFileHTML)");
 
@@ -197,6 +209,7 @@ char* saveInToFileHTML(char* newFile) {
 	   if (!file) {
 	   
 	    	//error - The file (homePage.html) did not open
+		   LogError(strerror(GetLastError()));
 	    	return 1;
 	   }
 
@@ -213,6 +226,7 @@ char* saveInToFileHTML(char* newFile) {
         if (!file) {
         
         	//error - The file (PhotoCopying.html) did not open
+			LogError(strerror(GetLastError()));
 			return 1;
         }
 
@@ -228,6 +242,7 @@ char* saveInToFileHTML(char* newFile) {
 		if (!file) {
 		
 			//error - The file (PhotoCopying.html) did not open
+			LogError(strerror(GetLastError()));
 			return 1;
 		}
 
@@ -238,12 +253,12 @@ char* saveInToFileHTML(char* newFile) {
 	else {
 	
 		//no exist file
-		printf("no exist file\n");
+		LogWarning("no exist file");
 		return 1;
 	}
 	free(newFile);
 
-	LogEventWithVariable("The file is closed and the new name send, the function (saveInToFileHTML) is done, name of file", newNameOfFile);
+	LogEvent("The file is closed and the new name send, the function (saveInToFileHTML) is done");
 	Loglinebreak();
 
 	//Sends the name of the saved file
@@ -262,7 +277,12 @@ char* createNewName(char* nameOfOriginFile) {
 	Loglinebreak();
 	LogEvent("enter the function (createNewName)");
 
-	char* newNameFile = (char*)malloc(30);
+	char* newNameFile = (char*)malloc(40);
+	if (!newNameFile)
+	{
+		LogError(strerror(GetLastError()));
+
+	}
 
 	if (strcmp(nameOfOriginFile, "index2.html") == 0) {
 	

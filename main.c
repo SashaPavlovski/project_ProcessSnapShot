@@ -24,7 +24,7 @@ int main(){
 	//to know if delete the directory dll and processes
 	//if the user presses 6
 	int HTMLUsed = 0;
-
+	int reset = 0;
 	firstTimeHomePage = 0;
 	
 	//Creates a malloc for the header structs
@@ -42,6 +42,7 @@ int main(){
 		switch (userResponse) {
 		case 1:
 			//Take One SnapShot
+			reset = 0;
 			loadFormFile = 0;
 			LogEventWithNumber("enter case", userResponse);
 			addOneSnapShot(NULL);
@@ -49,12 +50,14 @@ int main(){
 
 		case 2:
 			//Take 20 SnapShots
+			reset = 0;
 			loadFormFile = 0;
 			LogEventWithNumber("enter case", userResponse);
 			addOneSnapShot(NULL);
 			break;
 		case 3:
 			//Start Long SnapShot
+			reset = 0;
 			loadFormFile = 0;
 			LogEventWithNumber("enter case", userResponse);
 			addOneSnapShot(NULL);
@@ -68,6 +71,7 @@ int main(){
 			break;
 		case 6:
 			//Reset Collections
+			reset = 1;
 			LogEventWithNumber("enter case", userResponse);
 			if (HTMLUsed == 0) {
 				LogEvent("Enters the case where there is no dictionary dll");
@@ -90,6 +94,7 @@ int main(){
 
 		case 8:
 			//Load from File
+			reset = 0;
 			LogEventWithNumber("enter case", userResponse);
 			loadSnapFromFile();
 			break;
@@ -98,15 +103,19 @@ int main(){
 		case 9:
 			//Exit the program
 			LogEventWithNumber("enter case", userResponse);
-			if (HTMLUsed == 0) {
-				LogEvent("Enters the case where there is no dictionary dll");
-				resetCollections(snapshot_Head);
-			}
-			else {
-				LogEvent("Enters the case where there is dictionary dll");
-				deleteDictionaryDLLAndPro();
-				resetCollections(snapshot_Head);
-				HTMLUsed = 0;
+			if (reset == 0) {
+
+			    if (HTMLUsed == 0) {
+			    	LogEvent("Enters the case where there is no dictionary dll");
+			    	resetCollections(snapshot_Head);
+			    }
+			    else {
+			    	LogEvent("Enters the case where there is dictionary dll");
+			    	deleteDictionaryDLLAndPro();
+			    	resetCollections(snapshot_Head);
+			    	HTMLUsed = 0;
+			    }
+
 			}
 	    }
 

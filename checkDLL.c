@@ -13,7 +13,7 @@ int countNumberEnter = 0;
 //if there is a different dll in a linked list that is checked, add it to the original linked list.
 //get the original process and dll linked list of the process that is in checking
 
-void checkListDLL(PROCESS* currentProcess, DLLName * CheckDLL){
+void checkListDLL(PROCESS* currentProcess, DLLName* CheckDLL){
 
 	Loglinebreak();
 	LogEvent("enter the function (checkListDLL)");
