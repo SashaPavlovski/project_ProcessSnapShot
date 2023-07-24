@@ -1,5 +1,3 @@
-Certainly! Here's a short README for the "ProcessSnapShot" project:
-
 # ProcessSnapShot
 
 ## Overview
