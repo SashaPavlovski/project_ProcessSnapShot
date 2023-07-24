@@ -13,9 +13,8 @@ ProcessSnapShot is a command-line utility that captures and analyzes snapshots o
 
 ## Technologies Used
 
-- Language: Python
-- Libraries: psutil, argparse
-- Operating System: Cross-platform
+- Language: c
+
 
 ## Getting Started
 
